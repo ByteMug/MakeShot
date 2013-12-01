@@ -3,19 +3,12 @@ package editor.tools;
 /*
  ** Copyright 2005 Huxtable.com. All rights reserved.
  */
-import java.awt.Graphics;
-import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.awt.image.BufferedImageOp;
 import java.awt.image.ColorModel;
 import java.awt.image.ConvolveOp;
 import java.awt.image.Kernel;
 import java.awt.image.WritableRaster;
-
-import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
-
-import settings.Static;
 
 import editor.Bottom;
 import editor.Paint;

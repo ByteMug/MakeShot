@@ -37,7 +37,7 @@ public class Bottom extends JToolBar {
 		for (Font f : fonts) {
 			fontChooser.addItem(f.getFontName());
 		}
-		setBorder(new MatteBorder(0, 0, 1, 0, (Color) Color.LIGHT_GRAY));
+		setBorder(new MatteBorder(0, 0, 1, 0, Color.LIGHT_GRAY));
 		setSize(830, 25);
 		setLayout(null);
 		setMinimumSize(new Dimension(830, 25));

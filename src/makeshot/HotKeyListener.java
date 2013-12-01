@@ -1,11 +1,12 @@
 package makeshot;
 
-import javax.swing.JPanel;
 import logs.LogError;
+
 import org.jnativehook.GlobalScreen;
 import org.jnativehook.NativeHookException;
 import org.jnativehook.keyboard.NativeKeyEvent;
 import org.jnativehook.keyboard.NativeKeyListener;
+
 import printScreen.Area;
 import printScreen.FullScreen;
 import settings.HotKeys;
@@ -38,9 +39,11 @@ public class HotKeyListener
     }
   }
   
-  public void nativeKeyPressed(NativeKeyEvent e) {}
+  @Override
+public void nativeKeyPressed(NativeKeyEvent e) {}
   
-  public void nativeKeyReleased(NativeKeyEvent e)
+  @Override
+public void nativeKeyReleased(NativeKeyEvent e)
   {
     if (((HotKeys.panel == null) || (!HotKeys.panel.isShowing())) && 
       (Static.hotkeys == 1)) {
@@ -54,5 +57,6 @@ public class HotKeyListener
     }
   }
   
-  public void nativeKeyTyped(NativeKeyEvent e) {}
+  @Override
+public void nativeKeyTyped(NativeKeyEvent e) {}
 }

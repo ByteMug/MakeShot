@@ -1,12 +1,7 @@
 package makeshot;
 
 import java.awt.Component;
-import java.awt.Container;
 import java.awt.Desktop;
-import java.awt.Desktop.Action;
-import java.awt.Point;
-import java.awt.Toolkit;
-import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -16,15 +11,16 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.net.URI;
 import java.net.URL;
 import java.net.URLConnection;
+
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
+
 import logs.LogError;
 import settings.Kit;
 import settings.Static;
@@ -49,7 +45,7 @@ public class LinksList extends JScrollPane {
 			URLConnection conn = url.openConnection();
 
 			conn.setDoOutput(true);
-			String link = ((String) list.getSelectedValue()).substring(22);
+			String link = list.getSelectedValue().substring(22);
 			OutputStreamWriter writer = new OutputStreamWriter(
 					conn.getOutputStream());
 
@@ -82,7 +78,7 @@ public class LinksList extends JScrollPane {
 			try {
 				int len = model.getSize();
 				for (int i = 0; i < len; i++) {
-					pw.println(((String) model.get(i)).toString());
+					pw.println(model.get(i).toString());
 				}
 			} finally {
 				pw.close();
@@ -134,7 +130,7 @@ public class LinksList extends JScrollPane {
 					.getSystemClipboard()
 					.setContents(
 							new StringSelection(
-									((String) list.getSelectedValue())
+									list.getSelectedValue()
 											.toString()), null);
 		} catch (NullPointerException localNullPointerException) {
 		}
@@ -182,6 +178,7 @@ public class LinksList extends JScrollPane {
 
 	public void thumbOnClick() {
 		list.addMouseListener(new MouseListener() {
+			@Override
 			public void mouseClicked(MouseEvent e) {
 				if (e.getClickCount() == 2) {
 					Desktop desktop = Desktop.isDesktopSupported() ? Desktop
@@ -189,15 +186,15 @@ public class LinksList extends JScrollPane {
 					if ((desktop != null)
 							&& (desktop.isSupported(Desktop.Action.BROWSE))) {
 						try {
-							desktop.browse(URI.create(((String) LinksList.list
-									.getSelectedValue()).toString()));
+							desktop.browse(URI.create(LinksList.list
+									.getSelectedValue().toString()));
 						} catch (Exception e2) {
 							e2.printStackTrace();
 						}
 					}
 				}
 				if (LinksList.list.getSelectedIndex() >= 0) {
-					String link = ((String) LinksList.list.getSelectedValue())
+					String link = LinksList.list.getSelectedValue()
 							.substring(22);
 					LinksList.this.getImage(link);
 					LinksList.this.panel.showPanel(LinksList.list.getParent()
@@ -207,16 +204,20 @@ public class LinksList extends JScrollPane {
 				}
 			}
 
+			@Override
 			public void mouseEntered(MouseEvent e) {
 			}
 
+			@Override
 			public void mouseExited(MouseEvent m) {
 				LinksList.this.panel.exit();
 			}
 
+			@Override
 			public void mousePressed(MouseEvent e) {
 			}
 
+			@Override
 			public void mouseReleased(MouseEvent e) {
 			}
 		});

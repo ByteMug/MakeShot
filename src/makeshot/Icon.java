@@ -1,7 +1,7 @@
 package makeshot;
 
 import java.awt.Image;
-import java.awt.Toolkit;
+
 import settings.Kit;
 
 public class Icon

@@ -5,9 +5,9 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 
-import editor.Paint;
 import makeshot.Tray;
 import settings.Static;
+import editor.Paint;
 
 public class Start implements Runnable {
 	String pathu, type;

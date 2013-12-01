@@ -1,10 +1,8 @@
 package upload;
 
 import ini.Reader;
+
 import java.awt.Desktop;
-import java.awt.Desktop.Action;
-import java.awt.Toolkit;
-import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -12,7 +10,7 @@ import java.io.OutputStreamWriter;
 import java.net.URI;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.logging.Logger;
+
 import logs.LogError;
 import logs.Logging;
 import makeshot.LinksList;

@@ -29,7 +29,7 @@ public class Upper extends JToolBar {
 			Upper.class.getResource("/editor/tools/upload.png")), "upload");
 
 	public Upper() {
-		setBorder(new MatteBorder(0, 0, 1, 0, (Color) Color.LIGHT_GRAY));
+		setBorder(new MatteBorder(0, 0, 1, 0, Color.LIGHT_GRAY));
 		setSize(460, 24);
 		setLayout(null);
 		setMinimumSize(new Dimension(460, 25));

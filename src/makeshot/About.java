@@ -3,20 +3,20 @@ package makeshot;
 import java.awt.Cursor;
 import java.awt.Desktop;
 import java.awt.EventQueue;
-import java.awt.Window.Type;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.URI;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
+
 import logs.LogError;
 
 public class About extends JFrame {
@@ -24,6 +24,7 @@ public class About extends JFrame {
 
 	public About() {
 		EventQueue.invokeLater(new Runnable() {
+			@Override
 			public void run() {
 				try {
 					UIManager
@@ -68,6 +69,7 @@ public class About extends JFrame {
 							"<html><a href=\"http://makeshot.net\">MakeShot.net</a>");
 					btnmakeshotnet.setCursor(Cursor.getPredefinedCursor(12));
 					btnmakeshotnet.addActionListener(new ActionListener() {
+						@Override
 						public void actionPerformed(ActionEvent arg0) {
 							if (Desktop.isDesktopSupported()) {
 								try {

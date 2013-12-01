@@ -1,30 +1,18 @@
 package printScreen;
 
-import editor.Paint;
 import ini.Reader;
 
-import java.awt.Color;
-import java.awt.Container;
-import java.awt.Cursor;
-import java.awt.Dimension;
-import java.awt.Point;
-import java.awt.Rectangle;
-import java.awt.Toolkit;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
-
-import javax.swing.JDialog;
-import javax.swing.JPanel;
-
-import makeshot.Icon;
-import settings.Fix;
-import settings.Kit;
-
 import java.awt.AlphaComposite;
+import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.Robot;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.math.BigInteger;
@@ -32,12 +20,20 @@ import java.security.SecureRandom;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
 import javax.imageio.ImageIO;
+import javax.swing.JDialog;
+import javax.swing.JPanel;
+
 import logs.LogError;
 import logs.Logging;
+import makeshot.Icon;
+import settings.Fix;
+import settings.Kit;
 import settings.Static;
 import sound.Play;
 import upload.Start;
+import editor.Paint;
 
 public class Area extends JDialog {
 	Rectangle areaRect = new Rectangle(1, 1, 1, 1);
@@ -103,9 +99,11 @@ class ScreenScraper extends JPanel implements MouseListener,
 		this.area = area;
 	}
 
+	@Override
 	public void mouseClicked(MouseEvent e) {
 	}
 
+	@Override
 	public void mouseDragged(MouseEvent e) {
 		repaint();
 		x2 = e.getX();
@@ -113,15 +111,19 @@ class ScreenScraper extends JPanel implements MouseListener,
 		repaint();
 	}
 
+	@Override
 	public void mouseEntered(MouseEvent e) {
 	}
 
+	@Override
 	public void mouseExited(MouseEvent e) {
 	}
 
+	@Override
 	public void mouseMoved(MouseEvent arg0) {
 	}
 
+	@Override
 	public void mousePressed(MouseEvent e) {
 		repaint();
 		x1 = e.getX();
@@ -131,6 +133,7 @@ class ScreenScraper extends JPanel implements MouseListener,
 		repaint();
 	}
 
+	@Override
 	public void mouseReleased(MouseEvent e) {
 		this.area.dispose(1);
 		take();
@@ -141,6 +144,7 @@ class ScreenScraper extends JPanel implements MouseListener,
 		repaint();
 	}
 
+	@Override
 	public void paintComponent(Graphics th) {
 		super.paintComponent(th);
 		Graphics2D g = (Graphics2D) th;

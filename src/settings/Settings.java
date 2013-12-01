@@ -1,10 +1,11 @@
 package settings;
 
 import ini.Reader;
-import java.awt.Container;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
+
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -13,10 +14,10 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JSpinner;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
+
 import logs.LogError;
 import makeshot.Icon;
 
@@ -32,7 +33,7 @@ public class Settings {
 
 	public Settings() {
 		initialize();
-		
+
 	}
 
 	private void initialize() {
@@ -71,6 +72,7 @@ public class Settings {
 		this.chckbxSaveIn.setSelected(Static.saveSs == 1);
 		JButton btnNewButton = new JButton("Browse");
 		btnNewButton.addMouseListener(new MouseAdapter() {
+			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				JFileChooser chooser = new JFileChooser();
 				chooser.setCurrentDirectory(new File(Static.appDir));
@@ -105,11 +107,13 @@ public class Settings {
 
 		JButton closeBtn = new JButton("Cancel");
 		closeBtn.addMouseListener(new MouseAdapter() {
+			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				Settings.frame.dispose();
 			}
 		});
 		okBtn.addMouseListener(new MouseAdapter() {
+			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				Settings.this.save();
 				Settings.frame.setVisible(false);

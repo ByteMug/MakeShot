@@ -3,7 +3,9 @@ package makeshot;
 import java.io.File;
 import java.net.URL;
 import java.util.Scanner;
+
 import javax.swing.JOptionPane;
+
 import logs.LogError;
 import settings.Static;
 
@@ -17,7 +19,8 @@ public class Update
   private static URL url;
   static final String VERSION = "1.1";
   
-  public void run()
+  @Override
+public void run()
   {
     try
     {

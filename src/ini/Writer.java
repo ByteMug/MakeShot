@@ -6,9 +6,11 @@ import java.io.PrintWriter;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Calendar;
-import java.util.Properties;
+
 import logs.LogError;
+
 import org.ini4j.Ini;
+
 import settings.HotKeys;
 
 public class Writer {

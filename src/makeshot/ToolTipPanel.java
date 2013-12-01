@@ -1,7 +1,6 @@
 /*  1:   */ package makeshot;
 /*  2:   */ 
 /*  3:   */ import java.awt.Color;
-/*  4:   */ import java.awt.Container;
 /*  5:   */ import java.awt.Dimension;
 /*  6:   */ import java.awt.Graphics2D;
 /*  7:   */ import java.awt.RenderingHints;
@@ -9,13 +8,16 @@
 /*  9:   */ import java.io.IOException;
 /* 10:   */ import java.net.MalformedURLException;
 /* 11:   */ import java.net.URL;
+
 /* 12:   */ import javax.imageio.ImageIO;
 /* 13:   */ import javax.swing.ImageIcon;
 /* 14:   */ import javax.swing.JButton;
 /* 15:   */ import javax.swing.JLabel;
 /* 16:   */ import javax.swing.JWindow;
 /* 17:   */ import javax.swing.border.LineBorder;
+
 /* 18:   */ import logs.LogError;
+/*  4:   */ 
 /* 19:   */ 
 /* 20:   */ public class ToolTipPanel
 /* 21:   */   extends JWindow
@@ -66,7 +68,8 @@
 /* 66:   */     }
 /* 67:   */   }
 /* 68:   */   
-/* 69:   */   public void run()
+/* 69:   */   @Override
+public void run()
 /* 70:   */   {
 /* 71:   */     try
 /* 72:   */     {

@@ -35,6 +35,7 @@ public class GUI extends JFrame {
 	public static String path;
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
+			@Override
 			public void run() {
 				try {
 					GUI frame = new GUI();

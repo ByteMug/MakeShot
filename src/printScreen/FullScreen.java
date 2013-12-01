@@ -1,18 +1,18 @@
 package printScreen;
 
-import editor.Paint;
 import ini.Reader;
+
 import java.awt.Dimension;
 import java.awt.Rectangle;
 import java.awt.Robot;
-import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.logging.Logger;
+
 import javax.imageio.ImageIO;
+
 import logs.LogError;
 import logs.Logging;
 import settings.Fix;
@@ -20,6 +20,7 @@ import settings.Kit;
 import settings.Static;
 import sound.Play;
 import upload.Start;
+import editor.Paint;
 
 public class FullScreen
 {

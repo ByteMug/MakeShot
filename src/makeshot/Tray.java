@@ -1,25 +1,25 @@
 package makeshot;
 
 import ini.Writer;
+
 import java.awt.AWTException;
 import java.awt.Image;
 import java.awt.MenuItem;
 import java.awt.PopupMenu;
 import java.awt.SystemTray;
-import java.awt.Toolkit;
 import java.awt.TrayIcon;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.RandomAccessFile;
-import java.nio.channels.FileChannel;
-import java.util.logging.Logger;
-import javax.swing.JFrame;
+
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
+
 import logs.LogError;
 import logs.Logging;
+
 import org.jnativehook.GlobalScreen;
-import printScreen.Area;
+
 import printScreen.FullScreen;
 import settings.Fix;
 import settings.Kit;
@@ -100,7 +100,8 @@ public class Tray
       trayIcon.setImageAutoSize(true);
       trayIcon.addActionListener(new ActionListener()
       {
-        public void actionPerformed(ActionEvent e2)
+        @Override
+		public void actionPerformed(ActionEvent e2)
         {
           if (Tray.this.usr == null) {
             Tray.this.usr = new UserWindow();
@@ -114,7 +115,8 @@ public class Tray
       });
       exitItem.addActionListener(new ActionListener()
       {
-        public void actionPerformed(ActionEvent e)
+        @Override
+		public void actionPerformed(ActionEvent e)
         {
           GlobalScreen.unregisterNativeHook();
           System.exit(0);
@@ -122,21 +124,24 @@ public class Tray
       });
       fullShot.addActionListener(new ActionListener()
       {
-        public void actionPerformed(ActionEvent e)
+        @Override
+		public void actionPerformed(ActionEvent e)
         {
           new FullScreen();
         }
       });
       areaShot.addActionListener(new ActionListener()
       {
-        public void actionPerformed(ActionEvent e)
+        @Override
+		public void actionPerformed(ActionEvent e)
         {
           HotKeyListener.asd.create();
         }
       });
       openSettings.addActionListener(new ActionListener()
       {
-        public void actionPerformed(ActionEvent e)
+        @Override
+		public void actionPerformed(ActionEvent e)
         {
           if (Tray.this.settings == null) {
             Tray.this.settings = new Settings();
@@ -150,7 +155,8 @@ public class Tray
       });
       windowItem.addActionListener(new ActionListener()
       {
-        public void actionPerformed(ActionEvent e)
+        @Override
+		public void actionPerformed(ActionEvent e)
         {
           if (Tray.this.usr == null) {
             Tray.this.usr = new UserWindow();
@@ -164,14 +170,16 @@ public class Tray
       });
       aboutItem.addActionListener(new ActionListener()
       {
-        public void actionPerformed(ActionEvent e)
+        @Override
+		public void actionPerformed(ActionEvent e)
         {
           new About();
         }
       });
       hotkeysOff.addActionListener(new ActionListener()
       {
-        public void actionPerformed(ActionEvent e)
+        @Override
+		public void actionPerformed(ActionEvent e)
         {
           if (Tray.hotkeysOff.getLabel().equals("Turn hotkeys off"))
           {

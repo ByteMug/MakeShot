@@ -2,7 +2,9 @@ package upload;
 
 import java.io.File;
 import java.net.URI;
+
 import makeshot.Notifications;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -11,6 +13,7 @@ import org.apache.http.entity.mime.MultipartEntity;
 import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
+
 import settings.Static;
 import sound.Play;
 

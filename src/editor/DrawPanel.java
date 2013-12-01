@@ -20,7 +20,6 @@ import java.awt.geom.Line2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.imageio.ImageIO;
 import javax.swing.AbstractAction;
@@ -172,16 +171,19 @@ public class DrawPanel extends JLayeredPane implements MouseListener,
 	private void keyStrokesHandler() {
 		ActionMap actionMap = this.getActionMap();
 		actionMap.put("copy", new AbstractAction() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				imageToClipboard();
 			}
 		});
 		actionMap.put("save", new AbstractAction() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				save();
 			}
 		});
 		actionMap.put("close", new AbstractAction() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				Chooser.frame.dispose();
 				Paint.frame.dispose();
@@ -245,7 +247,7 @@ public class DrawPanel extends JLayeredPane implements MouseListener,
 			gz.drawString(Bottom.textField.getText(), x2, y2);
 			repaint();
 		} else if (Paint.currentTool == Paint.PICKER) {
-			int asd = ((BufferedImage) ss).getRGB(arg0.getX(), arg0.getY());
+			int asd = ss.getRGB(arg0.getX(), arg0.getY());
 			Bottom.color.setBackground(new Color(asd));
 		} else if (Paint.currentTool == Paint.EMO) {
 			gz.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER));

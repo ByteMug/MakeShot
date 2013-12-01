@@ -4,9 +4,7 @@ import java.awt.Cursor;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.IOException;
 
-import javax.imageio.ImageIO;
 import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
 
@@ -23,6 +21,7 @@ class ActionListener extends AbstractAction implements MouseListener {
 		// addMouseListener();
 	}
 
+	@Override
 	public void actionPerformed(ActionEvent e) {
 		Paint.drawPanel.setCursor(Cursor
 				.getPredefinedCursor(Cursor.DEFAULT_CURSOR));

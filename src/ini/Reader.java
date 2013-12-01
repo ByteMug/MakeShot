@@ -4,9 +4,12 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+
 import logs.LogError;
+
 import org.ini4j.Ini;
 import org.ini4j.Profile;
+
 import settings.Fix;
 
 public class Reader {
@@ -24,9 +27,9 @@ public class Reader {
 		if (this.file.exists()) {
 			try {
 				this.ini = new Ini(this.file);
-				Profile.Section section = (Profile.Section) this.ini
+				Profile.Section section = this.ini
 						.get("Dropbox");
-				this.dropboxSettings = ((String) section.get(tag));
+				this.dropboxSettings = (section.get(tag));
 			} catch (IOException e) {
 				LogError.get(e);
 			}
@@ -41,9 +44,9 @@ public class Reader {
 		if (this.file.exists()) {
 			try {
 				this.ini = new Ini(this.file);
-				Profile.Section section = (Profile.Section) this.ini
+				Profile.Section section = this.ini
 						.get("FTP server");
-				this.ftpSettings = ((String) section.get(tag));
+				this.ftpSettings = (section.get(tag));
 			} catch (IOException e) {
 				LogError.get(e);
 			}
@@ -57,8 +60,8 @@ public class Reader {
 		this.file = new File(this.a + "/hotkeys.ini");
 		try {
 			this.ini = new Ini(this.file);
-			Profile.Section section = (Profile.Section) this.ini.get("Hotkeys");
-			this.hkCode = Integer.parseInt((String) section.get(tag));
+			Profile.Section section = this.ini.get("Hotkeys");
+			this.hkCode = Integer.parseInt(section.get(tag));
 		} catch (IOException e) {
 			new Fix().repair("settings.ini");
 			new Fix().repair("hotkeys.ini");
@@ -86,9 +89,9 @@ public class Reader {
 		this.file = new File(this.a + "/settings.ini");
 		try {
 			this.ini = new Ini(this.file);
-			Profile.Section section = (Profile.Section) this.ini
+			Profile.Section section = this.ini
 					.get("Settings");
-			this.settBox = ((String) section.get(tag));
+			this.settBox = (section.get(tag));
 		} catch (IOException e) {
 			LogError.get(e);
 			new Fix();

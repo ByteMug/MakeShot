@@ -2,10 +2,10 @@ package settings;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 
 public class HotKeys {
@@ -49,26 +49,32 @@ public class HotKeys {
 			chckbxEnableHotkeys.setSelected(false);
 		}
 		fsBox.addKeyListener(new KeyListener() {
+			@Override
 			public void keyPressed(KeyEvent e) {
 			}
 
+			@Override
 			public void keyReleased(KeyEvent e) {
 				HotKeys.fsBox.setText(KeyEvent.getKeyText(e.getKeyCode()));
 				HotKeys.fsHK = e.getKeyCode();
 			}
 
+			@Override
 			public void keyTyped(KeyEvent e) {
 			}
 		});
 		areaBox.addKeyListener(new KeyListener() {
+			@Override
 			public void keyPressed(KeyEvent e) {
 			}
 
+			@Override
 			public void keyReleased(KeyEvent e) {
 				HotKeys.areaBox.setText(KeyEvent.getKeyText(e.getKeyCode()));
 				HotKeys.areaHK = e.getKeyCode();
 			}
 
+			@Override
 			public void keyTyped(KeyEvent e) {
 			}
 		});

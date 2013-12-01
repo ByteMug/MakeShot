@@ -7,7 +7,6 @@ import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.dnd.DropTarget;
-import java.awt.dnd.DropTargetContext;
 import java.awt.dnd.DropTargetDragEvent;
 import java.awt.dnd.DropTargetDropEvent;
 import java.awt.dnd.DropTargetEvent;
@@ -25,9 +24,11 @@ import java.util.EventObject;
 import java.util.Iterator;
 import java.util.List;
 import java.util.TooManyListenersException;
+
 import javax.swing.BorderFactory;
 import javax.swing.JComponent;
 import javax.swing.border.Border;
+
 import logs.LogError;
 
 public class FileDrop {
@@ -77,6 +78,7 @@ public class FileDrop {
 			return this.customFlavor;
 		}
 
+		@Override
 		public Object getTransferData(DataFlavor flavor)
 				throws UnsupportedFlavorException, IOException {
 			if (flavor.equals(DATA_FLAVOR)) {
@@ -90,6 +92,7 @@ public class FileDrop {
 			throw new UnsupportedFlavorException(flavor);
 		}
 
+		@Override
 		public DataFlavor[] getTransferDataFlavors() {
 			if (this.customFlavor != null) {
 				return new DataFlavor[] { this.customFlavor, DATA_FLAVOR,
@@ -98,6 +101,7 @@ public class FileDrop {
 			return new DataFlavor[] { DATA_FLAVOR, DataFlavor.stringFlavor };
 		}
 
+		@Override
 		public boolean isDataFlavorSupported(DataFlavor flavor) {
 			if (flavor.equals(DATA_FLAVOR)) {
 				return true;
@@ -211,6 +215,7 @@ public class FileDrop {
 			final Border dragBorder, boolean recursive, final Listener listener) {
 		if (supportsDnD()) {
 			this.dropListener = new DropTargetListener() {
+				@Override
 				public void dragEnter(DropTargetDragEvent evt) {
 					FileDrop.log(out, "FileDrop: dragEnter event.");
 					if (FileDrop.this.isDragOk(out, evt)) {
@@ -229,6 +234,7 @@ public class FileDrop {
 					}
 				}
 
+				@Override
 				public void dragExit(DropTargetEvent evt) {
 					FileDrop.log(out, "FileDrop: dragExit event.");
 					if ((c instanceof JComponent)) {
@@ -238,9 +244,11 @@ public class FileDrop {
 					}
 				}
 
+				@Override
 				public void dragOver(DropTargetDragEvent evt) {
 				}
 
+				@Override
 				public void drop(DropTargetDropEvent evt) {
 					FileDrop.log(out, "FileDrop: drop event.");
 					JComponent jc;
@@ -312,6 +320,7 @@ public class FileDrop {
 					}
 				}
 
+				@Override
 				public void dropActionChanged(DropTargetDragEvent evt) {
 					FileDrop.log(out, "FileDrop: dropActionChanged event.");
 					if (FileDrop.this.isDragOk(out, evt)) {
@@ -373,6 +382,7 @@ public class FileDrop {
 			LogError.get(e);
 		}
 		c.addHierarchyListener(new HierarchyListener() {
+			@Override
 			public void hierarchyChanged(HierarchyEvent evt) {
 				FileDrop.log(out, "FileDrop: Hierarchy changed.");
 				Component parent = c.getParent();

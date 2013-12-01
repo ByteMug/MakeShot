@@ -1,9 +1,7 @@
 package makeshot;
 
-import editor.Paint;
-import editor.SingleImage;
 import ini.Reader;
-import java.awt.Container;
+
 import java.awt.EventQueue;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
@@ -11,8 +9,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
+
 import javax.swing.BorderFactory;
-import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -27,16 +25,22 @@ import javax.swing.JPopupMenu;
 import javax.swing.JProgressBar;
 import javax.swing.UIManager;
 import javax.swing.filechooser.FileNameExtensionFilter;
+
 import logs.LogError;
+
 import org.jnativehook.GlobalScreen;
+
 import settings.Settings;
 import upload.Start;
+import editor.Paint;
+import editor.SingleImage;
 
 public class UserWindow {
 	public JFrame frame;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
+			@Override
 			public void run() {
 				UserWindow window = new UserWindow();
 				window.frame.setVisible(true);
@@ -93,12 +97,14 @@ public class UserWindow {
 		JButton copyBtn = new JButton(new ImageIcon(
 				UserWindow.class.getResource("/makeshot/copy.png")));
 		copyBtn.addMouseListener(new MouseAdapter() {
+			@Override
 			public void mouseEntered(MouseEvent arg0) {
 				UserWindow.this.asetTooltip("Copy link");
 				UserWindow.this.popup.setLocation(arg0.getLocationOnScreen());
 				UserWindow.this.popup.setVisible(true);
 			}
 
+			@Override
 			public void mouseExited(MouseEvent arg0) {
 				UserWindow.this.popup.setVisible(false);
 			}
@@ -107,12 +113,14 @@ public class UserWindow {
 		copyBtn.setContentAreaFilled(false);
 		copyBtn.setBackground(SystemColor.control);
 		copyBtn.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				UserWindow.this.list.copyLink();
 			}
 		});
 		JButton btnNewButton = new JButton("Browse");
 		btnNewButton.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				JFileChooser fc = new JFileChooser();
 				fc.setDialogTitle("Choose image..");
@@ -147,6 +155,7 @@ public class UserWindow {
 
 		JMenuItem mntmNewMenuItem = new JMenuItem("Hide");
 		mntmNewMenuItem.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				UserWindow.this.frame.dispose();
 			}
@@ -155,6 +164,7 @@ public class UserWindow {
 
 		JMenuItem mntmHello = new JMenuItem("Exit");
 		mntmHello.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				GlobalScreen.unregisterNativeHook();
 				System.exit(0);
@@ -167,6 +177,7 @@ public class UserWindow {
 
 		JMenuItem mntmPreferences = new JMenuItem("Settings");
 		mntmPreferences.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				new Settings();
 			}
@@ -178,6 +189,7 @@ public class UserWindow {
 
 		JMenuItem mntmAbout = new JMenuItem("About");
 		mntmAbout.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				new About();
 			}
@@ -186,6 +198,7 @@ public class UserWindow {
 
 		JMenuItem mntmCheckForUpdates = new JMenuItem("Check for updates");
 		mntmCheckForUpdates.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				Update.auto = false;
 				new Thread(UserWindow.this.updateCheck).start();
@@ -194,6 +207,7 @@ public class UserWindow {
 		mnNewMenu.add(mntmCheckForUpdates);
 
 		new FileDrop(System.out, panel, new FileDrop.Listener() {
+			@Override
 			public void filesDropped(File[] files) {
 				for (int i = 0; i < files.length; i++) {
 					try {
@@ -209,17 +223,20 @@ public class UserWindow {
 		JButton btnRm = new JButton(new ImageIcon(
 				UserWindow.class.getResource("/makeshot/rm.png")));
 		btnRm.addMouseListener(new MouseAdapter() {
+			@Override
 			public void mouseEntered(MouseEvent arg0) {
 				UserWindow.this.asetTooltip("Remove link from list");
 				UserWindow.this.popup.setLocation(arg0.getLocationOnScreen());
 				UserWindow.this.popup.setVisible(true);
 			}
 
+			@Override
 			public void mouseExited(MouseEvent arg0) {
 				UserWindow.this.popup.setVisible(false);
 			}
 		});
 		btnRm.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				UserWindow.this.list.removeLink();
 				UserWindow.this.popup.setVisible(false);
@@ -233,17 +250,20 @@ public class UserWindow {
 		JButton btnDel = new JButton(new ImageIcon(
 				UserWindow.class.getResource("/makeshot/del.png")));
 		btnDel.addMouseListener(new MouseAdapter() {
+			@Override
 			public void mouseEntered(MouseEvent arg0) {
 				UserWindow.this.asetTooltip("Delete image from the server");
 				UserWindow.this.popup.setLocation(arg0.getLocationOnScreen());
 				UserWindow.this.popup.setVisible(true);
 			}
 
+			@Override
 			public void mouseExited(MouseEvent arg0) {
 				UserWindow.this.popup.setVisible(false);
 			}
 		});
 		btnDel.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				UserWindow.this.popup.setVisible(false);
 				int dialogResult = JOptionPane
@@ -265,17 +285,20 @@ public class UserWindow {
 				UserWindow.class.getResource("/makeshot/dall.png")));
 
 		dallBtn.addMouseListener(new MouseAdapter() {
+			@Override
 			public void mouseEntered(MouseEvent arg0) {
 				UserWindow.this.asetTooltip("Clear list");
 				UserWindow.this.popup.setLocation(arg0.getLocationOnScreen());
 				UserWindow.this.popup.setVisible(true);
 			}
 
+			@Override
 			public void mouseExited(MouseEvent arg0) {
 				UserWindow.this.popup.setVisible(false);
 			}
 		});
 		dallBtn.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				UserWindow.this.popup.setVisible(false);
 				int dialogResult = JOptionPane.showConfirmDialog(null,

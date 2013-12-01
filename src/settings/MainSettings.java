@@ -1,24 +1,23 @@
 package settings;
 
-import java.awt.Toolkit;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
-import javax.swing.JTabbedPane;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DocumentFilter;
-import javax.swing.text.DocumentFilter.FilterBypass;
 
 public class MainSettings {
 	class MyDocumentFilter extends DocumentFilter {
 		MyDocumentFilter() {
 		}
 
+		@Override
 		public void insertString(DocumentFilter.FilterBypass fp, int offset,
 				String string, AttributeSet aset) throws BadLocationException {
 			int len = string.length();
@@ -36,6 +35,7 @@ public class MainSettings {
 			}
 		}
 
+		@Override
 		public void replace(DocumentFilter.FilterBypass fp, int offset,
 				int length, String string, AttributeSet aset)
 				throws BadLocationException {
@@ -77,6 +77,7 @@ public class MainSettings {
 		this.chckbxTooltip.setBounds(6, 59, 123, 23);
 
 		this.chckbxTooltip.addItemListener(new ItemListener() {
+			@Override
 			public void itemStateChanged(ItemEvent e) {
 				if (e.getStateChange() == 1) {
 					MainSettings.timeoutInput.setEnabled(true);

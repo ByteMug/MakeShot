@@ -1,23 +1,22 @@
 package editor;
 
-import editor.tools.Emotions;
 import java.awt.BorderLayout;
-import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GraphicsEnvironment;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
+
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.UIManager;
+
 import logs.LogError;
 import makeshot.Icon;
 import settings.Fix;
+import editor.tools.Emotions;
 
 public class Paint {
 	static final String BRUSH = "brush";
@@ -107,6 +106,7 @@ public class Paint {
 
 		frame.setVisible(true);
 		frame.addWindowListener(new WindowAdapter() {
+			@Override
 			public void windowClosing(WindowEvent e) {
 				if (Chooser.frame.isVisible()) {
 					Chooser.frame.dispose();

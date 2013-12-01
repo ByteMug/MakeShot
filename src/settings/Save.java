@@ -1,14 +1,14 @@
 package settings;
 
-import com.sun.jna.platform.win32.Advapi32Util;
-import com.sun.jna.platform.win32.WinReg;
-
 import ini.Writer;
 
 import java.io.File;
 
 import org.ini4j.Reg;
 import org.ini4j.Registry;
+
+import com.sun.jna.platform.win32.Advapi32Util;
+import com.sun.jna.platform.win32.WinReg;
 public class Save
 {
   String autostartKey = "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run";
