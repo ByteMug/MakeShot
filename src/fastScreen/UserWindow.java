@@ -1,27 +1,32 @@
 package fastScreen;
 
+import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.DefaultListModel;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JMenuBar;
 import javax.swing.JMenu;
+import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JProgressBar;
+import javax.swing.JScrollPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-import javax.swing.JTabbedPane;
+import javax.swing.WindowConstants;
 import javax.swing.border.TitledBorder;
-import javax.swing.JButton;
-import javax.swing.JProgressBar;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.JPanel;
 
 import settings.Settings;
+import javax.swing.JTextArea;
+import javax.swing.JList;
+import javax.swing.AbstractListModel;
+import javax.swing.ListSelectionModel;
+import javax.swing.JScrollBar;
 
 public class UserWindow {
 
@@ -51,25 +56,19 @@ public class UserWindow {
 	 */
 	private void initialize() {
 		try {
-			// Set System L&F
 			UIManager
 					.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-		} catch (UnsupportedLookAndFeelException e) {
-			// handle exception
-		} catch (ClassNotFoundException e) {
-			// handle exception
-		} catch (InstantiationException e) {
-			// handle exception
-		} catch (IllegalAccessException e) {
-			// handle exception
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		TitledBorder titled = new TitledBorder("Upload");
 
 		frame = new JFrame();
 		frame.setBounds(100, 100, 250, 350);
-		frame.setDefaultCloseOperation(frame.DISPOSE_ON_CLOSE);
+		frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-
+		frame.setIconImage(Toolkit.getDefaultToolkit().getImage(
+				"C:/Users/Adrian/Desktop/icon.jpg"));
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(null, "Upload", TitledBorder.LEADING,
 				TitledBorder.TOP, null, null));
@@ -82,13 +81,27 @@ public class UserWindow {
 		lblNewLabel.setBounds(10, 19, 115, 23);
 		panel.add(lblNewLabel);
 
+		JProgressBar progressBar = new JProgressBar();
+		progressBar.setBounds(10, 53, 214, 14);
+		panel.add(progressBar);
+
+		final LinksList list = new LinksList();
+		frame.getContentPane().add(list.create());
+
+		JButton btnNewButton_1 = new JButton("Copy link");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				list.copyLink();
+			}
+		});
+
 		JButton btnNewButton = new JButton("Browse");
 		btnNewButton.setBounds(135, 19, 89, 23);
 		panel.add(btnNewButton);
 
-		JProgressBar progressBar = new JProgressBar();
-		progressBar.setBounds(10, 53, 214, 14);
-		panel.add(progressBar);
+		btnNewButton_1.setBounds(135, 256, 89, 23);
+		frame.getContentPane().add(btnNewButton_1);
+
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setBorderPainted(false);
 		frame.setJMenuBar(menuBar);
@@ -117,6 +130,10 @@ public class UserWindow {
 		menuBar.add(mnNewMenu);
 
 		JMenuItem mntmAbout = new JMenuItem("About");
+		mntmAbout.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		mnNewMenu.add(mntmAbout);
 
 		JMenuItem mntmCheckForUpdates = new JMenuItem("Check for updates");

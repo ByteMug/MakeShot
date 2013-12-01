@@ -1,20 +1,36 @@
 package fastScreen;
 
-import javax.swing.*;
-
-import settings.Settings;
-
-import java.awt.*;
+import java.awt.AWTException;
+import java.awt.Image;
+import java.awt.MenuItem;
+import java.awt.PopupMenu;
+import java.awt.SystemTray;
+import java.awt.Toolkit;
+import java.awt.TrayIcon;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ToolTipManager;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+
+import printScreen.Area;
+import settings.Settings;
+
 public class Tray {
-	static Image image = Toolkit.getDefaultToolkit().getImage(
-			"C:/Users/Adrian/Desktop/MUIqNVX.jpg");
-	static MenuItem windowItem;
-	static UserWindow usr = new UserWindow();
-	public static void main(String args[]) {
-		new HotKeyListener().main(null);z
+	Image image = Toolkit.getDefaultToolkit().getImage(
+			ClassLoader.getSystemClassLoader().getResource(".").getPath()
+					+ "/icon.jpg");
+	MenuItem windowItem;
+	UserWindow usr = new UserWindow();
+	public static TrayIcon trayIcon;
+
+	public static void main(String[] args) {
+		new Tray().create();
+	}
+
+	private void create() {
+
 		try {
 			UIManager
 					.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
@@ -23,6 +39,7 @@ public class Tray {
 			e1.printStackTrace();
 		}
 		if (SystemTray.isSupported()) {
+
 			SystemTray tray = SystemTray.getSystemTray();
 			PopupMenu popup = new PopupMenu();
 			windowItem = new MenuItem("Show");
@@ -38,7 +55,7 @@ public class Tray {
 			popup.add(fullShot);
 			popup.add(aboutItem);
 			popup.add(exitItem);
-			TrayIcon trayIcon = new TrayIcon(image, "FastScreen", popup);
+			trayIcon = new TrayIcon(image, "FastScreen", popup);
 			trayIcon.setImageAutoSize(true);
 			// exit listener
 			exitItem.addActionListener(new ActionListener() {
@@ -46,23 +63,18 @@ public class Tray {
 					System.exit(0);
 				}
 			});
-			// exit listener
-			aboutItem.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					// open About window
-				}
-			});
 			// full listener
 			fullShot.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					// take screenshto
+					new printScreen.FullScreen();
 				}
 			});
 			// area listener
 			areaShot.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					// take area ss
-					System.out.println(new UserWindow().frame.isVisible());
+					System.out.println("AREA PHOTO TAKIN'");
+					new printScreen.Area().create();
+					new printScreen.Area().isVisible = 1;
 				}
 			});
 			// setting open listener
@@ -78,15 +90,21 @@ public class Tray {
 					if (usr.frame.isVisible()) {
 						usr.frame.toFront();
 					} else if (!usr.frame.isVisible()) {
-						//usr.main(null);
-						//usr.frame.setVisible(false);
+						// usr.main(null);
+						// usr.frame.setVisible(false);
 						System.out.println("chleb2");
 						usr.frame.setVisible(true);
 					}
 				}
 			});
+			aboutItem.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					new About();
+				}
+			});
 			try {
 				tray.add(trayIcon);
+				HotKeyListener.main(null);
 			} catch (AWTException e) {
 				System.err.println("Can't add to tray");
 			}
