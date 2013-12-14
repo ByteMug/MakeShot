@@ -20,28 +20,27 @@ public class Fix {
 		}
 	}
 
-	File a = new File(System.getProperty("user.home") + File.separator
-			+ ".MakeShot" + File.separator);
-	File hotkeys = new File(a.getPath() + "/hotkeys.ini");
+	private final static File a = new File(System.getProperty("user.home")
+			+ File.separator + ".MakeShot" + File.separator);
+	private final static File hotkeys = new File(a.getPath() + "/hotkeys.ini");
+	private final static File ftp = new File(a.getPath() + "/ftp.ini");
 
 	InputStream inStream = null;
 
 	OutputStream outStream = null;
-	File settings = new File(a.getPath() + "/settings.ini");
+	private final static File settings = new File(a.getPath() + "/settings.ini");
 
 	public Fix() {
 		if (a.exists()) {
-			if (!hotkeys.exists())
-				repair("hotkeys.ini");
-			if (!settings.exists())
-				repair("settings.ini");
 		} else {
 			a.mkdir();
-			if (!hotkeys.exists())
-				repair("hotkeys.ini");
-			if (!settings.exists())
-				repair("settings.ini");
 		}
+		if (!hotkeys.exists())
+			repair("hotkeys.ini");
+		if (!settings.exists())
+			repair("settings.ini");
+		if (!ftp.exists())
+			repair("ftp.ini");
 	}
 
 	public void repair(String file) {
