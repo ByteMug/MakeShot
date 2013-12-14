@@ -118,7 +118,7 @@ public class Tray {
 			areaShot.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					HotKeyListener.asd.create();
+					HotKeyListener.areaPrintScreen.create();
 				}
 			});
 			openSettings.addActionListener(new ActionListener() {

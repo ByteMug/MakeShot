@@ -2,6 +2,7 @@ package makeshot;
 
 import ini.Reader;
 
+import java.awt.Desktop;
 import java.awt.EventQueue;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
@@ -9,6 +10,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
+import java.net.URI;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -68,7 +70,6 @@ public class UserWindow {
 		} catch (Exception e) {
 			LogError.get(e);
 		}
-		Update.auto = true;
 		new Thread(this.updateCheck).start();
 		this.frame = new JFrame("MakeShot");
 		this.frame.setResizable(false);
@@ -83,14 +84,10 @@ public class UserWindow {
 
 		this.popup.add(this.popupText);
 
-		JLabel lblNewLabel = new JLabel(
+		JLabel dropUploadLabel = new JLabel(
 				"<html>Choose or drop images to upload</html>");
-		lblNewLabel.setBounds(10, 0, 115, 52);
-		panel.add(lblNewLabel);
-
-		JProgressBar progressBar = new JProgressBar();
-		progressBar.setBounds(10, 53, 214, 14);
-		panel.add(progressBar);
+		dropUploadLabel.setBounds(10, 0, 115, 52);
+		panel.add(dropUploadLabel);
 
 		this.frame.getContentPane().add(this.list.create());
 
@@ -118,8 +115,8 @@ public class UserWindow {
 				UserWindow.this.list.copyLink();
 			}
 		});
-		JButton btnNewButton = new JButton("Browse");
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton browseForImageBtn = new JButton("Browse");
+		browseForImageBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				JFileChooser fc = new JFileChooser();
@@ -140,8 +137,8 @@ public class UserWindow {
 				}
 			}
 		});
-		btnNewButton.setBounds(135, 11, 89, 23);
-		panel.add(btnNewButton);
+		browseForImageBtn.setBounds(135, 11, 89, 23);
+		panel.add(browseForImageBtn);
 
 		copyBtn.setBounds(20, 247, 40, 38);
 		this.frame.getContentPane().add(copyBtn);
@@ -150,61 +147,77 @@ public class UserWindow {
 		menuBar.setBorderPainted(false);
 		this.frame.setJMenuBar(menuBar);
 
-		JMenu mnMenu = new JMenu("File");
-		menuBar.add(mnMenu);
+		JMenu fileMenu = new JMenu("File");
+		menuBar.add(fileMenu);
 
-		JMenuItem mntmNewMenuItem = new JMenuItem("Hide");
-		mntmNewMenuItem.addActionListener(new ActionListener() {
+		JMenuItem hideMenuItem = new JMenuItem("Hide");
+		hideMenuItem.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				UserWindow.this.frame.dispose();
 			}
 		});
-		mnMenu.add(mntmNewMenuItem);
+		fileMenu.add(hideMenuItem);
 
-		JMenuItem mntmHello = new JMenuItem("Exit");
-		mntmHello.addActionListener(new ActionListener() {
+		JMenuItem exitMenuItem = new JMenuItem("Exit");
+		exitMenuItem.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				GlobalScreen.unregisterNativeHook();
 				System.exit(0);
 			}
 		});
-		mnMenu.add(mntmHello);
+		fileMenu.add(exitMenuItem);
 
-		JMenu mnOptions = new JMenu("Options");
-		menuBar.add(mnOptions);
+		JMenu optionMenu = new JMenu("Options");
+		menuBar.add(optionMenu);
 
-		JMenuItem mntmPreferences = new JMenuItem("Settings");
-		mntmPreferences.addActionListener(new ActionListener() {
+		JMenuItem settingsMenuItem = new JMenuItem("Settings");
+		settingsMenuItem.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				new Settings();
 			}
 		});
-		mnOptions.add(mntmPreferences);
+		optionMenu.add(settingsMenuItem);
 
-		JMenu mnNewMenu = new JMenu("Help");
-		menuBar.add(mnNewMenu);
-
-		JMenuItem mntmAbout = new JMenuItem("About");
-		mntmAbout.addActionListener(new ActionListener() {
+		JMenu helpMenu = new JMenu("Help");
+		menuBar.add(helpMenu);
+		JMenuItem helpMenuItem = new JMenuItem("Help contents");
+		helpMenuItem.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Desktop desktop = Desktop.isDesktopSupported() ? Desktop
+						.getDesktop() : null;
+				if (desktop != null
+						&& desktop.isSupported(Desktop.Action.BROWSE)) {
+					try {
+						desktop.browse(URI.create("http://makeshot.net/help"));
+					} catch (Exception ez) {
+						ez.printStackTrace();
+					}
+				}
+			}
+		});
+		helpMenu.add(helpMenuItem);
+		JMenuItem aboutMenuItem = new JMenuItem("About");
+		aboutMenuItem.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				new About();
 			}
 		});
-		mnNewMenu.add(mntmAbout);
+		helpMenu.add(aboutMenuItem);
 
-		JMenuItem mntmCheckForUpdates = new JMenuItem("Check for updates");
-		mntmCheckForUpdates.addActionListener(new ActionListener() {
+		JMenuItem updateMenuItem = new JMenuItem("Check for updates");
+		updateMenuItem.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				Update.auto = false;
 				new Thread(UserWindow.this.updateCheck).start();
 			}
 		});
-		mnNewMenu.add(mntmCheckForUpdates);
+		helpMenu.add(updateMenuItem);
 
 		new FileDrop(System.out, panel, new FileDrop.Listener() {
 			@Override
@@ -220,9 +233,9 @@ public class UserWindow {
 				}
 			}
 		});
-		JButton btnRm = new JButton(new ImageIcon(
+		JButton removeFromListBtn = new JButton(new ImageIcon(
 				UserWindow.class.getResource("/makeshot/rm.png")));
-		btnRm.addMouseListener(new MouseAdapter() {
+		removeFromListBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
 				UserWindow.this.asetTooltip("Remove link from list");
@@ -235,21 +248,21 @@ public class UserWindow {
 				UserWindow.this.popup.setVisible(false);
 			}
 		});
-		btnRm.addActionListener(new ActionListener() {
+		removeFromListBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				UserWindow.this.list.removeLink();
 				UserWindow.this.popup.setVisible(false);
 			}
 		});
-		btnRm.setBounds(184, 247, 40, 38);
-		btnRm.setBorder(BorderFactory.createEmptyBorder());
-		btnRm.setContentAreaFilled(false);
-		this.frame.getContentPane().add(btnRm);
+		removeFromListBtn.setBounds(184, 247, 40, 38);
+		removeFromListBtn.setBorder(BorderFactory.createEmptyBorder());
+		removeFromListBtn.setContentAreaFilled(false);
+		this.frame.getContentPane().add(removeFromListBtn);
 
-		JButton btnDel = new JButton(new ImageIcon(
+		JButton deleteFromServerBtn = new JButton(new ImageIcon(
 				UserWindow.class.getResource("/makeshot/del.png")));
-		btnDel.addMouseListener(new MouseAdapter() {
+		deleteFromServerBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
 				UserWindow.this.asetTooltip("Delete image from the server");
@@ -262,7 +275,7 @@ public class UserWindow {
 				UserWindow.this.popup.setVisible(false);
 			}
 		});
-		btnDel.addActionListener(new ActionListener() {
+		deleteFromServerBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				UserWindow.this.popup.setVisible(false);
@@ -276,15 +289,15 @@ public class UserWindow {
 				}
 			}
 		});
-		btnDel.setBorder(BorderFactory.createEmptyBorder());
-		btnDel.setContentAreaFilled(false);
-		btnDel.setBounds(146, 247, 40, 38);
-		this.frame.getContentPane().add(btnDel);
+		deleteFromServerBtn.setBorder(BorderFactory.createEmptyBorder());
+		deleteFromServerBtn.setContentAreaFilled(false);
+		deleteFromServerBtn.setBounds(146, 247, 40, 38);
+		this.frame.getContentPane().add(deleteFromServerBtn);
 
-		JButton dallBtn = new JButton(new ImageIcon(
+		JButton clearListBtn = new JButton(new ImageIcon(
 				UserWindow.class.getResource("/makeshot/dall.png")));
 
-		dallBtn.addMouseListener(new MouseAdapter() {
+		clearListBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
 				UserWindow.this.asetTooltip("Clear list");
@@ -297,7 +310,7 @@ public class UserWindow {
 				UserWindow.this.popup.setVisible(false);
 			}
 		});
-		dallBtn.addActionListener(new ActionListener() {
+		clearListBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				UserWindow.this.popup.setVisible(false);
@@ -310,9 +323,9 @@ public class UserWindow {
 				}
 			}
 		});
-		dallBtn.setContentAreaFilled(false);
-		dallBtn.setBorder(BorderFactory.createEmptyBorder());
-		dallBtn.setBounds(107, 247, 40, 38);
-		this.frame.getContentPane().add(dallBtn);
+		clearListBtn.setContentAreaFilled(false);
+		clearListBtn.setBorder(BorderFactory.createEmptyBorder());
+		clearListBtn.setBounds(107, 247, 40, 38);
+		this.frame.getContentPane().add(clearListBtn);
 	}
 }
