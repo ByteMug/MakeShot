@@ -1,13 +1,10 @@
 package net.makeshot.upload;
 
 import java.awt.TrayIcon;
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
 
 import net.makeshot.imageEditor.EditorGUI;
+import net.makeshot.main.Tray;
 import net.makeshot.settings.Static;
-import makeshot.Tray;
 
 public class Start implements Runnable {
 	String path, type;

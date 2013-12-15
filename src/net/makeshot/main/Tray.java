@@ -1,6 +1,4 @@
-package makeshot;
-
-import ini.Writer;
+package net.makeshot.main;
 
 import java.awt.AWTException;
 import java.awt.Image;
@@ -15,16 +13,16 @@ import java.io.RandomAccessFile;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
-import logs.LogError;
-import logs.Logging;
+import net.makeshot.ini.Writer;
+import net.makeshot.logs.LogError;
+import net.makeshot.logs.Logging;
+import net.makeshot.printScreen.FullScreen;
+import net.makeshot.settings.Fix;
+import net.makeshot.settings.Kit;
+import net.makeshot.settings.Settings;
+import net.makeshot.settings.Static;
 
 import org.jnativehook.GlobalScreen;
-
-import printScreen.FullScreen;
-import settings.Fix;
-import settings.Kit;
-import settings.Settings;
-import settings.Static;
 
 public class Tray {
 	public static TrayIcon trayIcon;

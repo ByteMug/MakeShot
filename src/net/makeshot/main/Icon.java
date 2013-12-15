@@ -1,8 +1,8 @@
-package makeshot;
+package net.makeshot.main;
 
 import java.awt.Image;
 
-import settings.Kit;
+import net.makeshot.settings.Kit;
 
 public class Icon
 {

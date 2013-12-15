@@ -12,6 +12,7 @@ import java.util.Date;
 import javax.imageio.ImageIO;
 
 import net.makeshot.imageEditor.EditorGUI;
+import net.makeshot.ini.Reader;
 import net.makeshot.logs.LogError;
 import net.makeshot.logs.Logging;
 import net.makeshot.settings.Fix;
@@ -19,7 +20,6 @@ import net.makeshot.settings.Kit;
 import net.makeshot.settings.Static;
 import net.makeshot.sound.Play;
 import net.makeshot.upload.Start;
-import makeshot.ini.Reader;
 
 public class FullScreen
 {

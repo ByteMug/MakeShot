@@ -14,8 +14,8 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import net.makeshot.logs.LogError;
-import makeshot.Icon;
-import makeshot.WindowsLF;
+import net.makeshot.main.Icon;
+import net.makeshot.main.WindowsLF;
 
 public class Chooser extends JPanel implements ChangeListener {
 

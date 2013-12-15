@@ -19,10 +19,10 @@ import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.WindowConstants;
 
+import net.makeshot.ini.Reader;
 import net.makeshot.logs.LogError;
-import makeshot.Cleaner;
-import makeshot.Icon;
-import makeshot.ini.Reader;
+import net.makeshot.main.Cleaner;
+import net.makeshot.main.Icon;
 
 public class Settings {
 	public static JFrame frame;

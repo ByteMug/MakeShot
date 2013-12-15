@@ -1,4 +1,4 @@
-/*  1:   */ package makeshot;
+/*  1:   */ package net.makeshot.main;
 /*  2:   */ 
 /*  3:   */ import java.awt.Color;
 /*  5:   */ import java.awt.Dimension;
@@ -16,7 +16,8 @@
 /* 16:   */ import javax.swing.JWindow;
 /* 17:   */ import javax.swing.border.LineBorder;
 
-/* 18:   */ import logs.LogError;
+import net.makeshot.logs.LogError;
+/* 18:   */ 
 /*  4:   */ 
 /* 19:   */ 
 /* 20:   */ public class ToolTipPanel

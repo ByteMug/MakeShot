@@ -3,9 +3,9 @@ package net.makeshot.upload;
 import java.io.File;
 import java.net.URI;
 
-import makeshot.Notifications;
-import makeshot.ini.Reader;
+import net.makeshot.ini.Reader;
 import net.makeshot.logs.LogError;
+import net.makeshot.main.Notifications;
 import net.makeshot.sound.Play;
 
 import org.apache.http.HttpEntity;

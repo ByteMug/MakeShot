@@ -11,9 +11,9 @@ import java.util.List;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
-import makeshot.Notifications;
-import makeshot.ini.Reader;
+import net.makeshot.ini.Reader;
 import net.makeshot.logs.LogError;
+import net.makeshot.main.Notifications;
 import net.makeshot.settings.Static;
 import net.makeshot.sound.Play;
 

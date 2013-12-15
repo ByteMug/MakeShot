@@ -38,9 +38,9 @@ import net.makeshot.imageEditor.additional.Arrow;
 import net.makeshot.imageEditor.additional.Blur;
 import net.makeshot.imageEditor.additional.Emoticons;
 import net.makeshot.logs.LogError;
+import net.makeshot.main.Cleaner;
 import net.makeshot.settings.Static;
 import net.makeshot.upload.Start;
-import makeshot.Cleaner;
 
 public class DrawPanel extends JLayeredPane implements MouseListener,
 		MouseMotionListener {

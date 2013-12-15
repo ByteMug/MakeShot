@@ -1,4 +1,4 @@
-package makeshot;
+package net.makeshot.main;
 
 import java.io.File;
 import java.net.URL;
@@ -6,8 +6,8 @@ import java.util.Scanner;
 
 import javax.swing.JOptionPane;
 
-import logs.LogError;
-import settings.Static;
+import net.makeshot.logs.LogError;
+import net.makeshot.settings.Static;
 
 public class Update
   implements Runnable

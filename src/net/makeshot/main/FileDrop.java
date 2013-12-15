@@ -1,4 +1,4 @@
-package makeshot;
+package net.makeshot.main;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -29,7 +29,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JComponent;
 import javax.swing.border.Border;
 
-import logs.LogError;
+import net.makeshot.logs.LogError;
 
 public class FileDrop {
 	public static class Event extends EventObject {

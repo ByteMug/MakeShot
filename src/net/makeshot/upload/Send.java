@@ -3,7 +3,7 @@ package net.makeshot.upload;
 import java.io.File;
 import java.net.URI;
 
-import makeshot.Notifications;
+import net.makeshot.main.Notifications;
 import net.makeshot.settings.Static;
 import net.makeshot.sound.Play;
 

@@ -7,9 +7,9 @@ import java.net.URI;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
-import makeshot.Notifications;
-import makeshot.ini.Reader;
+import net.makeshot.ini.Reader;
 import net.makeshot.logs.LogError;
+import net.makeshot.main.Notifications;
 import net.makeshot.sound.Play;
 
 import org.apache.http.HttpEntity;

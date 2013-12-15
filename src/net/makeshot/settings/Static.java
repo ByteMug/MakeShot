@@ -4,8 +4,8 @@ import static com.sun.jna.platform.win32.WinReg.HKEY_CURRENT_USER;
 
 import java.awt.image.BufferedImage;
 
-import makeshot.HotKeyListener;
-import makeshot.ini.Reader;
+import net.makeshot.ini.Reader;
+import net.makeshot.main.HotKeyListener;
 
 import com.sun.jna.platform.win32.Advapi32Util;
 

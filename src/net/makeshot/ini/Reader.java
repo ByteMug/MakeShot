@@ -1,16 +1,15 @@
-package ini;
+package net.makeshot.ini;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
-import logs.LogError;
+import net.makeshot.logs.LogError;
+import net.makeshot.settings.Fix;
 
 import org.ini4j.Ini;
 import org.ini4j.Profile;
-
-import settings.Fix;
 
 public class Reader {
 	private File a = new File(System.getProperty("user.home") + File.separator
@@ -27,8 +26,7 @@ public class Reader {
 		if (this.file.exists()) {
 			try {
 				this.ini = new Ini(this.file);
-				Profile.Section section = this.ini
-						.get("Dropbox");
+				Profile.Section section = this.ini.get("Dropbox");
 				this.dropboxSettings = (section.get(tag));
 			} catch (IOException e) {
 				LogError.get(e);
@@ -44,8 +42,7 @@ public class Reader {
 		if (this.file.exists()) {
 			try {
 				this.ini = new Ini(this.file);
-				Profile.Section section = this.ini
-						.get("FTP server");
+				Profile.Section section = this.ini.get("FTP server");
 				this.ftpSettings = (section.get(tag));
 			} catch (IOException e) {
 				LogError.get(e);
@@ -89,8 +86,7 @@ public class Reader {
 		this.file = new File(this.a + "/settings.ini");
 		try {
 			this.ini = new Ini(this.file);
-			Profile.Section section = this.ini
-					.get("Settings");
+			Profile.Section section = this.ini.get("Settings");
 			this.settBox = (section.get(tag));
 		} catch (IOException e) {
 			LogError.get(e);

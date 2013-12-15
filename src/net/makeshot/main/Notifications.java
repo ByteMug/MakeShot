@@ -1,4 +1,4 @@
-package makeshot;
+package net.makeshot.main;
 
 import java.awt.Color;
 import java.awt.Cursor;
@@ -17,12 +17,12 @@ import javax.swing.JWindow;
 import javax.swing.UIManager;
 import javax.swing.border.LineBorder;
 
-import logs.LogError;
+import net.makeshot.logs.LogError;
+import net.makeshot.settings.Static;
+import net.makeshot.upload.Start;
 import net.sf.jcarrierpigeon.Notification;
 import net.sf.jcarrierpigeon.NotificationQueue;
 import net.sf.jcarrierpigeon.WindowPosition;
-import settings.Static;
-import upload.Start;
 
 public class Notifications {
 	static URI imgLink;

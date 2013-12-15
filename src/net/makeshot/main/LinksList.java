@@ -1,4 +1,4 @@
-package makeshot;
+package net.makeshot.main;
 
 import java.awt.Component;
 import java.awt.Desktop;
@@ -21,9 +21,9 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 
-import logs.LogError;
-import settings.Kit;
-import settings.Static;
+import net.makeshot.logs.LogError;
+import net.makeshot.settings.Kit;
+import net.makeshot.settings.Static;
 
 public class LinksList extends JScrollPane {
 	static File listFile = new File(System.getProperty("user.home")

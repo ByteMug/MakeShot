@@ -9,14 +9,14 @@ import java.net.URI;
 import java.net.URL;
 import java.net.URLConnection;
 
+import net.makeshot.ini.Reader;
 import net.makeshot.logs.LogError;
 import net.makeshot.logs.Logging;
+import net.makeshot.main.LinksList;
+import net.makeshot.main.Notifications;
 import net.makeshot.settings.Kit;
 import net.makeshot.settings.Static;
 import net.makeshot.sound.Play;
-import makeshot.LinksList;
-import makeshot.Notifications;
-import makeshot.ini.Reader;
 
 public class ToMakeshot {
 	public static String getUrl(String addFileResponse) {

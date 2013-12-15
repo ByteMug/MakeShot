@@ -1,4 +1,4 @@
-package makeshot;
+package net.makeshot.main;
 
 import javax.swing.UIManager;
 

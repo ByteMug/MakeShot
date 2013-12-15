@@ -1,4 +1,4 @@
-package makeshot;
+package net.makeshot.main;
 
 import java.awt.Cursor;
 import java.awt.Desktop;
@@ -17,7 +17,7 @@ import javax.swing.JTextPane;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 
-import logs.LogError;
+import net.makeshot.logs.LogError;
 
 public class About extends JFrame {
 	private JPanel contentPane;

@@ -15,9 +15,9 @@ import javax.swing.UIManager;
 
 import net.makeshot.imageEditor.additional.Emoticons;
 import net.makeshot.logs.LogError;
+import net.makeshot.main.Cleaner;
+import net.makeshot.main.Icon;
 import net.makeshot.settings.Fix;
-import makeshot.Cleaner;
-import makeshot.Icon;
 
 public class EditorGUI {
 	public final static String BRUSH = "brush";

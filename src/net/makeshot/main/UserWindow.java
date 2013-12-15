@@ -1,6 +1,4 @@
-package makeshot;
-
-import ini.Reader;
+package net.makeshot.main;
 
 import java.awt.Desktop;
 import java.awt.EventQueue;
@@ -24,18 +22,15 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
-import javax.swing.JProgressBar;
 import javax.swing.UIManager;
 import javax.swing.filechooser.FileNameExtensionFilter;
-
-import logs.LogError;
-
+import net.makeshot.imageEditor.*;
+import net.makeshot.imageEditor.SingleImage;
+import net.makeshot.logs.LogError;
+import net.makeshot.settings.Settings;
+import net.makeshot.upload.Start;
+import net.makeshot.ini.Reader;
 import org.jnativehook.GlobalScreen;
-
-import settings.Settings;
-import upload.Start;
-import editor.Paint;
-import editor.SingleImage;
 
 public class UserWindow {
 	public JFrame frame;
@@ -130,7 +125,7 @@ public class UserWindow {
 				int returnVal = fc.showDialog(UserWindow.this.frame, "Open");
 				if (returnVal == 0) {
 					if (new Reader().settings("edit").equals("1")) {
-						new Paint(fc.getSelectedFile().getPath());
+						new EditorGUI(fc.getSelectedFile().getPath());
 					} else {
 						new Start(fc.getSelectedFile().getPath(), "");
 					}

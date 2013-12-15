@@ -1,16 +1,15 @@
-package makeshot;
+package net.makeshot.main;
 
-import logs.LogError;
+import net.makeshot.logs.LogError;
+import net.makeshot.printScreen.Area;
+import net.makeshot.printScreen.FullScreen;
+import net.makeshot.settings.HotKeys;
+import net.makeshot.settings.Static;
 
 import org.jnativehook.GlobalScreen;
 import org.jnativehook.NativeHookException;
 import org.jnativehook.keyboard.NativeKeyEvent;
 import org.jnativehook.keyboard.NativeKeyListener;
-
-import printScreen.Area;
-import printScreen.FullScreen;
-import settings.HotKeys;
-import settings.Static;
 
 public class HotKeyListener implements NativeKeyListener {
 	static Area areaPrintScreen = new Area();

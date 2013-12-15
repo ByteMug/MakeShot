@@ -1,4 +1,4 @@
-package ini;
+package net.makeshot.ini;
 
 import java.io.File;
 import java.io.IOException;
@@ -7,11 +7,11 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Calendar;
 
-import logs.LogError;
+import net.makeshot.logs.LogError;
+import net.makeshot.settings.HotKeys;
 
 import org.ini4j.Ini;
 
-import settings.HotKeys;
 
 public class Writer {
 	static File settDir = new File(System.getProperty("user.home")

@@ -24,15 +24,16 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 
 import net.makeshot.imageEditor.EditorGUI;
+import net.makeshot.ini.Reader;
 import net.makeshot.logs.LogError;
 import net.makeshot.logs.Logging;
+import net.makeshot.main.Icon;
 import net.makeshot.settings.Fix;
 import net.makeshot.settings.Kit;
 import net.makeshot.settings.Static;
 import net.makeshot.sound.Play;
 import net.makeshot.upload.Start;
-import makeshot.Icon;
-import makeshot.ini.Reader;
+
 
 public class Area extends JDialog {
 	Rectangle areaRect = new Rectangle(1, 1, 1, 1);

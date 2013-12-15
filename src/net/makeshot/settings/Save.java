@@ -2,7 +2,7 @@ package net.makeshot.settings;
 
 import java.io.File;
 
-import makeshot.ini.Writer;
+import net.makeshot.ini.Writer;
 
 import org.ini4j.Reg;
 import org.ini4j.Registry;

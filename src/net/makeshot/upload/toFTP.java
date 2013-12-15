@@ -5,7 +5,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-import makeshot.Notifications;
+import net.makeshot.main.Notifications;
 import net.makeshot.settings.Static;
 import net.makeshot.sound.Play;
 
