@@ -58,13 +58,11 @@ public class UserWindow {
 		this.popupText.setText(text);
 	}
 
+	/*
+	 * GUI creation happens below
+	 */
 	private void initialize() {
-		try {
-			UIManager
-					.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-		} catch (Exception e) {
-			LogError.get(e);
-		}
+		WindowsLF.apply();
 		new Thread(this.updateCheck).start();
 		this.frame = new JFrame("MakeShot");
 		this.frame.setResizable(false);
@@ -73,6 +71,17 @@ public class UserWindow {
 		this.frame.setDefaultCloseOperation(2);
 		this.frame.getContentPane().setLayout(null);
 		JPanel panel = new JPanel();
+		frameMenuBar();
+		browsePanel(panel);
+		copyLinkBtn();
+		browseBtn(panel);
+		rmFromListBtn();
+		delFromSrvBtn();
+		clearListBtn();
+	}
+
+	private void browsePanel(JPanel panel) {
+
 		panel.setBounds(0, 0, 234, 74);
 		this.frame.getContentPane().add(panel);
 		panel.setLayout(null);
@@ -86,30 +95,23 @@ public class UserWindow {
 
 		this.frame.getContentPane().add(this.list.create());
 
-		JButton copyBtn = new JButton(new ImageIcon(
-				UserWindow.class.getResource("/makeshot/copy.png")));
-		copyBtn.addMouseListener(new MouseAdapter() {
+		new FileDrop(System.out, panel, new FileDrop.Listener() {
 			@Override
-			public void mouseEntered(MouseEvent arg0) {
-				UserWindow.this.asetTooltip("Copy link");
-				UserWindow.this.popup.setLocation(arg0.getLocationOnScreen());
-				UserWindow.this.popup.setVisible(true);
+			public void filesDropped(File[] files) {
+				for (int i = 0; i < files.length; i++) {
+					try {
+						new SingleImage(files[i].toString());
+					} catch (Exception e) {
+						JOptionPane.showMessageDialog(null, "Invalid image",
+								"File", 0);
+						LogError.get(e);
+					}
+				}
 			}
+		});
+	}
 
-			@Override
-			public void mouseExited(MouseEvent arg0) {
-				UserWindow.this.popup.setVisible(false);
-			}
-		});
-		copyBtn.setBorder(BorderFactory.createEmptyBorder());
-		copyBtn.setContentAreaFilled(false);
-		copyBtn.setBackground(SystemColor.control);
-		copyBtn.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				UserWindow.this.list.copyLink();
-			}
-		});
+	private void browseBtn(JPanel panel) {
 		JButton browseForImageBtn = new JButton("Browse");
 		browseForImageBtn.addActionListener(new ActionListener() {
 			@Override
@@ -134,10 +136,75 @@ public class UserWindow {
 		});
 		browseForImageBtn.setBounds(135, 11, 89, 23);
 		panel.add(browseForImageBtn);
+	}
 
+	private void clearListBtn() {
+		JButton clearListBtn = new JButton(new ImageIcon(
+				UserWindow.class.getResource("/net/makeshot/main/dall.png")));
+
+		clearListBtn.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				UserWindow.this.asetTooltip("Clear list");
+				UserWindow.this.popup.setLocation(arg0.getLocationOnScreen());
+				UserWindow.this.popup.setVisible(true);
+			}
+
+			@Override
+			public void mouseExited(MouseEvent arg0) {
+				UserWindow.this.popup.setVisible(false);
+			}
+		});
+		clearListBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				UserWindow.this.popup.setVisible(false);
+				int dialogResult = JOptionPane.showConfirmDialog(null,
+						"Do you want to completely clear the list?",
+						"Deleting", 0);
+				if (dialogResult == 0) {
+					LinksList.model.clear();
+					LinksList.exportList();
+				}
+			}
+		});
+		clearListBtn.setContentAreaFilled(false);
+		clearListBtn.setBorder(BorderFactory.createEmptyBorder());
+		clearListBtn.setBounds(107, 247, 40, 38);
+		this.frame.getContentPane().add(clearListBtn);
+	}
+
+	private void copyLinkBtn() {
+		JButton copyBtn = new JButton(new ImageIcon(
+				UserWindow.class.getResource("/net/makeshot/main/copy.png")));
+
+		copyBtn.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				UserWindow.this.asetTooltip("Copy link");
+				UserWindow.this.popup.setLocation(arg0.getLocationOnScreen());
+				UserWindow.this.popup.setVisible(true);
+			}
+
+			@Override
+			public void mouseExited(MouseEvent arg0) {
+				UserWindow.this.popup.setVisible(false);
+			}
+		});
+		copyBtn.setBorder(BorderFactory.createEmptyBorder());
+		copyBtn.setContentAreaFilled(false);
+		copyBtn.setBackground(SystemColor.control);
+		copyBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				UserWindow.this.list.copyLink();
+			}
+		});
 		copyBtn.setBounds(20, 247, 40, 38);
 		this.frame.getContentPane().add(copyBtn);
+	}
 
+	private void frameMenuBar() {
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setBorderPainted(false);
 		this.frame.setJMenuBar(menuBar);
@@ -213,23 +280,11 @@ public class UserWindow {
 			}
 		});
 		helpMenu.add(updateMenuItem);
+	}
 
-		new FileDrop(System.out, panel, new FileDrop.Listener() {
-			@Override
-			public void filesDropped(File[] files) {
-				for (int i = 0; i < files.length; i++) {
-					try {
-						new SingleImage(files[i].toString());
-					} catch (Exception e) {
-						JOptionPane.showMessageDialog(null, "Invalid image",
-								"File", 0);
-						LogError.get(e);
-					}
-				}
-			}
-		});
+	private void rmFromListBtn() {
 		JButton removeFromListBtn = new JButton(new ImageIcon(
-				UserWindow.class.getResource("/makeshot/rm.png")));
+				UserWindow.class.getResource("/net/makeshot/main/rm.png")));
 		removeFromListBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
@@ -254,9 +309,11 @@ public class UserWindow {
 		removeFromListBtn.setBorder(BorderFactory.createEmptyBorder());
 		removeFromListBtn.setContentAreaFilled(false);
 		this.frame.getContentPane().add(removeFromListBtn);
+	}
 
+	private void delFromSrvBtn() {
 		JButton deleteFromServerBtn = new JButton(new ImageIcon(
-				UserWindow.class.getResource("/makeshot/del.png")));
+				UserWindow.class.getResource("/net/makeshot/main/del.png")));
 		deleteFromServerBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
@@ -288,39 +345,5 @@ public class UserWindow {
 		deleteFromServerBtn.setContentAreaFilled(false);
 		deleteFromServerBtn.setBounds(146, 247, 40, 38);
 		this.frame.getContentPane().add(deleteFromServerBtn);
-
-		JButton clearListBtn = new JButton(new ImageIcon(
-				UserWindow.class.getResource("/makeshot/dall.png")));
-
-		clearListBtn.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseEntered(MouseEvent arg0) {
-				UserWindow.this.asetTooltip("Clear list");
-				UserWindow.this.popup.setLocation(arg0.getLocationOnScreen());
-				UserWindow.this.popup.setVisible(true);
-			}
-
-			@Override
-			public void mouseExited(MouseEvent arg0) {
-				UserWindow.this.popup.setVisible(false);
-			}
-		});
-		clearListBtn.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				UserWindow.this.popup.setVisible(false);
-				int dialogResult = JOptionPane.showConfirmDialog(null,
-						"Do you want to completely clear the list?",
-						"Deleting", 0);
-				if (dialogResult == 0) {
-					LinksList.model.clear();
-					LinksList.exportList();
-				}
-			}
-		});
-		clearListBtn.setContentAreaFilled(false);
-		clearListBtn.setBorder(BorderFactory.createEmptyBorder());
-		clearListBtn.setBounds(107, 247, 40, 38);
-		this.frame.getContentPane().add(clearListBtn);
 	}
 }

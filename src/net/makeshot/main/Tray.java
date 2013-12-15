@@ -60,12 +60,7 @@ public class Tray {
 
 	private void create() {
 		Static.update();
-		try {
-			UIManager
-					.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-		} catch (Exception e1) {
-			LogError.get(e1);
-		}
+		WindowsLF.apply();
 		if (SystemTray.isSupported()) {
 			windowItem = new MenuItem("Show");
 			openSettings = new MenuItem("Settings");

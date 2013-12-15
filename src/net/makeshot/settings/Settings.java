@@ -23,6 +23,7 @@ import net.makeshot.ini.Reader;
 import net.makeshot.logs.LogError;
 import net.makeshot.main.Cleaner;
 import net.makeshot.main.Icon;
+import net.makeshot.main.WindowsLF;
 
 public class Settings {
 	public static JFrame frame;
@@ -41,12 +42,7 @@ public class Settings {
 
 	private void initialize() {
 		Static.update();
-		try {
-			UIManager
-					.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-		} catch (Exception e) {
-			LogError.get(e);
-		}
+		WindowsLF.apply();
 		frame = new JFrame("Settings");
 
 		frame.setIconImage(Icon.get());

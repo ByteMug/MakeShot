@@ -17,6 +17,7 @@ import net.makeshot.imageEditor.additional.Emoticons;
 import net.makeshot.logs.LogError;
 import net.makeshot.main.Cleaner;
 import net.makeshot.main.Icon;
+import net.makeshot.main.WindowsLF;
 import net.makeshot.settings.Fix;
 
 public class EditorGUI {
@@ -56,9 +57,8 @@ public class EditorGUI {
 	private ExportToolbar exportToolbar = new ExportToolbar();
 
 	public EditorGUI(String p) {
+		WindowsLF.apply();
 		try {
-			UIManager
-					.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
 			currentTool = "brush";
 
 			Fix.ssDir();

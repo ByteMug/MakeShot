@@ -65,12 +65,7 @@ public class Notifications {
 	}
 
 	public static void showNotification(boolean good, String link, String file) {
-		try {
-			UIManager
-					.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-		} catch (Exception e) {
-			LogError.get(e);
-		}
+		WindowsLF.apply();
 		if (good) {
 			imgLink = URI.create(link);
 			NotificationQueue queue = new NotificationQueue();
