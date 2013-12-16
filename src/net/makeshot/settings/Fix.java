@@ -16,7 +16,7 @@ public class Fix {
 	public static void ssDir() {
 		File ssDir = new File(Static.ssDirectory);
 		if (!ssDir.exists()) {
-			ssDir.mkdir();
+			ssDir.mkdirs();
 		}
 	}
 

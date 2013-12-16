@@ -3,6 +3,7 @@ package net.makeshot.settings;
 import static com.sun.jna.platform.win32.WinReg.HKEY_CURRENT_USER;
 
 import java.awt.image.BufferedImage;
+import java.io.File;
 
 import net.makeshot.ini.Reader;
 import net.makeshot.main.HotKeyListener;
@@ -48,6 +49,7 @@ public class Static {
 		} else {
 			imageType = BufferedImage.TYPE_3BYTE_BGR;
 		}
+		Fix.ssDir();
 		HotKeyListener.register();
 
 		if (Advapi32Util
