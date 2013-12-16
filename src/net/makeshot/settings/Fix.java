@@ -8,7 +8,7 @@ import java.io.OutputStream;
 
 import javax.swing.JOptionPane;
 
-import net.makeshot.logs.LogError;
+import net.makeshot.logs.LOG;
 
 import org.ini4j.Ini;
 
@@ -78,7 +78,7 @@ public class Fix {
 									+ file
 									+ ". It should be fixed now.\r\nIf not, contact us.");
 		} catch (IOException e) {
-			LogError.get(e);
+			LOG.error(e);
 		}
 	}
 }

@@ -20,7 +20,7 @@ import javax.swing.UIManager;
 import javax.swing.WindowConstants;
 
 import net.makeshot.ini.Reader;
-import net.makeshot.logs.LogError;
+import net.makeshot.logs.LOG;
 import net.makeshot.main.Cleaner;
 import net.makeshot.main.Icon;
 import net.makeshot.main.WindowsLF;

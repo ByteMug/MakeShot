@@ -9,6 +9,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
@@ -21,15 +22,15 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 
-import net.makeshot.logs.LogError;
+import net.makeshot.logs.LOG;
 import net.makeshot.settings.Kit;
 import net.makeshot.settings.Static;
 
 public class LinksList extends JScrollPane {
 	static File listFile = new File(System.getProperty("user.home")
 			+ File.separator + ".MakeShot" + File.separator + "/links list.txt");
-	static DefaultListModel<String> model = new DefaultListModel();
-	static JList<String> list = new JList(model);
+	static DefaultListModel<String> model = new DefaultListModel<String>();
+	static JList<String> list = new JList<String>(model);
 	String imgurUrl;
 	ToolTipPanel panel;
 
@@ -66,8 +67,8 @@ public class LinksList extends JScrollPane {
 							"Oops!", 0);
 				}
 			}
-		} catch (Exception e) {
-			LogError.get(e);
+		} catch (IOException e) {
+			LOG.error(e);
 		}
 	}
 
@@ -83,8 +84,8 @@ public class LinksList extends JScrollPane {
 			} finally {
 				pw.close();
 			}
-		} catch (Exception e) {
-			LogError.get(e);
+		} catch (IOException e) {
+			LOG.error(e);
 		}
 	}
 
@@ -104,21 +105,14 @@ public class LinksList extends JScrollPane {
 
 				model.addElement(line);
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			try {
-				if (fr != null) {
-					fr.close();
-				}
-			} catch (Exception e2) {
-				e2.printStackTrace();
-			}
+		} catch (IOException e) {
+			LOG.error(e);
 		} finally {
 			try {
 				if (fr != null) {
 					fr.close();
 				}
-			} catch (Exception e2) {
+			} catch (IOException e2) {
 				e2.printStackTrace();
 			}
 		}
@@ -129,9 +123,8 @@ public class LinksList extends JScrollPane {
 			Kit.get()
 					.getSystemClipboard()
 					.setContents(
-							new StringSelection(
-									list.getSelectedValue()
-											.toString()), null);
+							new StringSelection(list.getSelectedValue()
+									.toString()), null);
 		} catch (NullPointerException localNullPointerException) {
 		}
 	}
@@ -167,7 +160,8 @@ public class LinksList extends JScrollPane {
 				String line = reader.readLine();
 				this.imgurUrl = line;
 			}
-		} catch (Exception localException) {
+		} catch (IOException e) {
+			LOG.error(e);
 		}
 	}
 
@@ -188,14 +182,14 @@ public class LinksList extends JScrollPane {
 						try {
 							desktop.browse(URI.create(LinksList.list
 									.getSelectedValue().toString()));
-						} catch (Exception e2) {
-							e2.printStackTrace();
+						} catch (IOException e2) {
+							LOG.error(e2);
 						}
 					}
 				}
 				if (LinksList.list.getSelectedIndex() >= 0) {
-					String link = LinksList.list.getSelectedValue()
-							.substring(22);
+					String link = LinksList.list.getSelectedValue().substring(
+							22);
 					LinksList.this.getImage(link);
 					LinksList.this.panel.showPanel(LinksList.list.getParent()
 							.getLocationOnScreen().x, LinksList.list

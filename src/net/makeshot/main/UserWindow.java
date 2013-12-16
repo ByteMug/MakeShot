@@ -8,6 +8,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.URI;
 
 import javax.swing.BorderFactory;
@@ -24,12 +26,13 @@ import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.UIManager;
 import javax.swing.filechooser.FileNameExtensionFilter;
+
 import net.makeshot.imageEditor.*;
-import net.makeshot.imageEditor.SingleImage;
-import net.makeshot.logs.LogError;
+import net.makeshot.logs.LOG;
 import net.makeshot.settings.Settings;
 import net.makeshot.upload.Start;
 import net.makeshot.ini.Reader;
+
 import org.jnativehook.GlobalScreen;
 
 public class UserWindow {
@@ -99,13 +102,7 @@ public class UserWindow {
 			@Override
 			public void filesDropped(File[] files) {
 				for (int i = 0; i < files.length; i++) {
-					try {
-						new SingleImage(files[i].toString());
-					} catch (Exception e) {
-						JOptionPane.showMessageDialog(null, "Invalid image",
-								"File", 0);
-						LogError.get(e);
-					}
+					new SingleImage(files[i].toString());
 				}
 			}
 		});
@@ -255,7 +252,7 @@ public class UserWindow {
 						&& desktop.isSupported(Desktop.Action.BROWSE)) {
 					try {
 						desktop.browse(URI.create("http://makeshot.net/help"));
-					} catch (Exception ez) {
+					} catch (IOException ez) {
 						ez.printStackTrace();
 					}
 				}

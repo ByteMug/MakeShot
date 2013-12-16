@@ -29,7 +29,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JComponent;
 import javax.swing.border.Border;
 
-import net.makeshot.logs.LogError;
+import net.makeshot.logs.LOG;
 
 public class FileDrop {
 	public static class Event extends EventObject {
@@ -135,12 +135,12 @@ public class FileDrop {
 						list.add(file);
 					}
 				} catch (Exception ex) {
-					LogError.get(ex);
+					LOG.error(ex);
 				}
 			}
 			return (File[]) list.toArray(new File[list.size()]);
 		} catch (IOException ex) {
-			LogError.get(ex);
+			LOG.error(ex);
 		}
 		return new File[0];
 	}
@@ -303,11 +303,11 @@ public class FileDrop {
 							}
 						}
 					} catch (IOException io) {
-						LogError.get(io);
+						LOG.error(io);
 						evt.rejectDrop();
 					} catch (UnsupportedFlavorException ufe) {
 
-						LogError.get(ufe);
+						LOG.error(ufe);
 						evt.rejectDrop();
 					} finally {
 
@@ -379,7 +379,7 @@ public class FileDrop {
 		try {
 			dt.addDropTargetListener(this.dropListener);
 		} catch (TooManyListenersException e) {
-			LogError.get(e);
+			LOG.error(e);
 		}
 		c.addHierarchyListener(new HierarchyListener() {
 			@Override

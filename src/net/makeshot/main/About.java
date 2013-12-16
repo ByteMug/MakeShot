@@ -17,7 +17,7 @@ import javax.swing.JTextPane;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 
-import net.makeshot.logs.LogError;
+import net.makeshot.logs.LOG;
 
 public class About extends JFrame {
 	private JPanel contentPane;

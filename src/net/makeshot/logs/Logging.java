@@ -15,7 +15,7 @@ public class Logging {
 			FileHandler fh = new FileHandler(
 					System.getProperty("user.home") + File.separator
 							+ ".MakeShot" + File.separator + "log.txt", append);
-			// fh.setFormatter(new XMLFormatter());
+		
 			fh.setFormatter(new SimpleFormatter());
 			logger = Logger.getLogger("TestLog");
 			logger.addHandler(fh);

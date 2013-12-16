@@ -16,7 +16,7 @@
 /* 16:   */ import javax.swing.JWindow;
 /* 17:   */ import javax.swing.border.LineBorder;
 
-import net.makeshot.logs.LogError;
+import net.makeshot.logs.LOG;
 /* 18:   */ 
 /*  4:   */ 
 /* 19:   */ 
@@ -86,11 +86,11 @@ public void run()
 /* 82:   */     }
 /* 83:   */     catch (MalformedURLException e)
 /* 84:   */     {
-/* 85:80 */       LogError.get(e);
+/* 85:80 */       LOG.error(e);
 /* 86:   */     }
 /* 87:   */     catch (IOException e)
 /* 88:   */     {
-/* 89:82 */       LogError.get(e);
+/* 89:82 */       LOG.error(e);
 /* 90:   */     }
 /* 91:   */   }
 /* 92:   */   

@@ -7,6 +7,7 @@ import java.awt.Font;
 import java.awt.SystemColor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 import java.net.URI;
 
 import javax.swing.BorderFactory;
@@ -17,7 +18,7 @@ import javax.swing.JWindow;
 import javax.swing.UIManager;
 import javax.swing.border.LineBorder;
 
-import net.makeshot.logs.LogError;
+import net.makeshot.logs.LOG;
 import net.makeshot.settings.Static;
 import net.makeshot.upload.Start;
 import net.sf.jcarrierpigeon.Notification;
@@ -83,9 +84,6 @@ public class Notifications {
 		}
 	}
 
-	/**
-	 * @wbp.parser.entryPoint
-	 */
 	private static JWindow SuccessFrame() {
 		window = new JWindow();
 		window.getContentPane().addMouseListener(new MouseAdapter() {
@@ -98,8 +96,8 @@ public class Notifications {
 					try {
 						window.dispose();
 						desktop.browse(imgLink);
-					} catch (Exception e) {
-						e.printStackTrace();
+					} catch (IOException e) {
+						LOG.error(e);
 					}
 				}
 			}

@@ -1,6 +1,6 @@
 package net.makeshot.main;
 
-import net.makeshot.logs.LogError;
+import net.makeshot.logs.LOG;
 import net.makeshot.printScreen.Area;
 import net.makeshot.printScreen.FullScreen;
 import net.makeshot.settings.HotKeys;
@@ -19,7 +19,7 @@ public class HotKeyListener implements NativeKeyListener {
 			try {
 				GlobalScreen.registerNativeHook();
 			} catch (NativeHookException ex) {
-				LogError.get(ex);
+				LOG.error(ex);
 				System.exit(1);
 			}
 			GlobalScreen.getInstance().addNativeKeyListener(

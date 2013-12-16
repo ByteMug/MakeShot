@@ -8,13 +8,15 @@ import java.awt.SystemTray;
 import java.awt.TrayIcon;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.RandomAccessFile;
 
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
 import net.makeshot.ini.Writer;
-import net.makeshot.logs.LogError;
+import net.makeshot.logs.LOG;
 import net.makeshot.logs.Logging;
 import net.makeshot.printScreen.FullScreen;
 import net.makeshot.settings.Fix;
@@ -47,8 +49,8 @@ public class Tray {
 
 				LinksList.importList();
 			}
-		} catch (Exception e) {
-			LogError.get(e);
+		} catch (IOException e) {
+			LOG.error(e);
 		}
 	}
 
@@ -162,7 +164,7 @@ public class Tray {
 			try {
 				this.tray.add(trayIcon);
 			} catch (AWTException e) {
-				LogError.get(e);
+				LOG.error(e);
 			}
 		} else {
 			Logging.logger.info("Tray unavailable");

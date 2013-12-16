@@ -37,7 +37,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import net.makeshot.imageEditor.additional.Arrow;
 import net.makeshot.imageEditor.additional.Blur;
 import net.makeshot.imageEditor.additional.Emoticons;
-import net.makeshot.logs.LogError;
+import net.makeshot.logs.LOG;
 import net.makeshot.main.Cleaner;
 import net.makeshot.settings.Static;
 import net.makeshot.upload.Start;
@@ -137,7 +137,7 @@ public class DrawPanel extends JLayeredPane implements MouseListener,
 		} catch (IOException e) {
 			JOptionPane.showMessageDialog(null, "Invalid image", "File",
 					JOptionPane.ERROR_MESSAGE);
-			LogError.get(e);
+			LOG.error(e);
 		}
 
 		addMouseListener(this);
@@ -235,7 +235,7 @@ public class DrawPanel extends JLayeredPane implements MouseListener,
 		} catch (IOException e) {
 			JOptionPane.showMessageDialog(null, "Invalid image", "File",
 					JOptionPane.ERROR_MESSAGE);
-			LogError.get(e);
+			LOG.error(e);
 		}
 	}
 

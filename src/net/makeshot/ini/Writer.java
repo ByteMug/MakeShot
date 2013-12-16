@@ -7,7 +7,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Calendar;
 
-import net.makeshot.logs.LogError;
+import net.makeshot.logs.LOG;
 import net.makeshot.settings.HotKeys;
 
 import org.ini4j.Ini;
@@ -42,7 +42,7 @@ public class Writer {
 				writer.println(hexString);
 				writer.close();
 			} catch (IOException | NoSuchAlgorithmException e) {
-				LogError.get(e);
+				LOG.error(e);
 			}
 		}
 	}
@@ -59,7 +59,7 @@ public class Writer {
 			this.ini.put("Dropbox", tag, value);
 			this.ini.store(this.file);
 		} catch (IOException e) {
-			LogError.get(e);
+			LOG.error(e);
 		}
 	}
 
@@ -73,7 +73,7 @@ public class Writer {
 			this.ini.put("FTP server", tag, value);
 			this.ini.store(this.file);
 		} catch (IOException e) {
-			LogError.get(e);
+			LOG.error(e);
 		}
 	}
 
@@ -89,7 +89,7 @@ public class Writer {
 				this.ini.store(this.file);
 			}
 		} catch (IOException e) {
-			LogError.get(e);
+			LOG.error(e);
 		}
 	}
 
@@ -100,7 +100,7 @@ public class Writer {
 			this.ini.put("Settings", tag, value);
 			this.ini.store(this.file);
 		} catch (IOException e) {
-			LogError.get(e);
+			LOG.error(e);
 		}
 	}
 }

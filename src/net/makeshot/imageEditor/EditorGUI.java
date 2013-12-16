@@ -14,7 +14,7 @@ import javax.swing.JScrollPane;
 import javax.swing.UIManager;
 
 import net.makeshot.imageEditor.additional.Emoticons;
-import net.makeshot.logs.LogError;
+import net.makeshot.logs.LOG;
 import net.makeshot.main.Cleaner;
 import net.makeshot.main.Icon;
 import net.makeshot.main.WindowsLF;
@@ -58,16 +58,10 @@ public class EditorGUI {
 
 	public EditorGUI(String p) {
 		WindowsLF.apply();
-		try {
 			currentTool = "brush";
-
 			Fix.ssDir();
 			path = p;
 			createGui();
-		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, "Invalid image", "Error", 0);
-			LogError.get(e);
-		}
 	}
 
 	private void createGui() {

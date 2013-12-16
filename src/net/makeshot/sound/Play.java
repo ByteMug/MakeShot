@@ -11,12 +11,14 @@ import javax.sound.sampled.DataLine;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
+import net.makeshot.logs.LOG;
+
 public class Play {
 	private static URL path;
-	private  static AudioInputStream audioIn;
-	private  static AudioFormat format;
-	private  static DataLine.Info info;
-	private  static Clip clip;
+	private static AudioInputStream audioIn;
+	private static AudioFormat format;
+	private static DataLine.Info info;
+	private static Clip clip;
 
 	public static void success() {
 		try {
@@ -28,11 +30,11 @@ public class Play {
 			info = new DataLine.Info(Clip.class, format);
 			clip = (Clip) AudioSystem.getLine(info);
 			clip.open(audioIn);
-			clip.start();
-		} catch (UnsupportedAudioFileException e) {
-			e.printStackTrace();
-		} catch (LineUnavailableException | IOException e) {
-			e.printStackTrace();
+			if (!clip.isRunning())
+				clip.start();
+		} catch (LineUnavailableException | IOException
+				| UnsupportedAudioFileException e) {
+			LOG.error(e);
 		}
 	}
 
@@ -46,11 +48,12 @@ public class Play {
 			info = new DataLine.Info(Clip.class, format);
 			clip = (Clip) AudioSystem.getLine(info);
 			clip.open(audioIn);
-			clip.start();
-		} catch (UnsupportedAudioFileException e) {
-			e.printStackTrace();
-		} catch (LineUnavailableException | IOException e) {
-			e.printStackTrace();
+			if (!clip.isRunning())
+				clip.start();
+		} catch (LineUnavailableException | IOException
+				| UnsupportedAudioFileException e) {
+			LOG.error(e);
 		}
+
 	}
 }

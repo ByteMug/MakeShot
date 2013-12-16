@@ -1,5 +1,6 @@
 package net.makeshot.printScreen;
 
+import java.awt.AWTException;
 import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Cursor;
@@ -13,6 +14,7 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.math.BigInteger;
 import java.security.SecureRandom;
 import java.text.DateFormat;
@@ -25,7 +27,7 @@ import javax.swing.JPanel;
 
 import net.makeshot.imageEditor.EditorGUI;
 import net.makeshot.ini.Reader;
-import net.makeshot.logs.LogError;
+import net.makeshot.logs.LOG;
 import net.makeshot.logs.Logging;
 import net.makeshot.main.Icon;
 import net.makeshot.settings.Fix;
@@ -210,9 +212,9 @@ class ScreenScraper extends JPanel implements MouseListener,
 						Logging.logger.info("Upload started");
 					}
 				}
-			} catch (Exception e) {
+			} catch (IOException | AWTException e) {
 				Play.error();
-				LogError.get(e);
+				LOG.error(e);
 			}
 		}
 	}

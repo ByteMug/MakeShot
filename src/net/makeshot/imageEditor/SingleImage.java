@@ -2,6 +2,7 @@ package net.makeshot.imageEditor;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -9,7 +10,7 @@ import java.util.Date;
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 
-import net.makeshot.logs.LogError;
+import net.makeshot.logs.LOG;
 import net.makeshot.settings.Static;
 import net.makeshot.upload.Start;
 
@@ -23,9 +24,12 @@ public class SingleImage {
 			if (net.makeshot.settings.Static.saveSs == 1) {
 
 				String current = net.makeshot.settings.Static.ssDirectory + "/"
-						+ dateFormat.format(date) + "." + net.makeshot.settings.Static.ext;
+						+ dateFormat.format(date) + "."
+						+ net.makeshot.settings.Static.ext;
 				image = ImageIO.read(new File(imagePath));
-				ImageIO.write(image, net.makeshot.settings.Static.ext, new File(current));
+
+				ImageIO.write(image, net.makeshot.settings.Static.ext,
+						new File(current));
 
 				if (net.makeshot.settings.Static.editSs == 1) {
 					new EditorGUI(current);
@@ -49,11 +53,12 @@ public class SingleImage {
 					file.delete();
 				}
 			}
-		} catch (Exception e) {
+		} catch (IOException e) {
 			JOptionPane.showMessageDialog(null, "Invalid image", "File",
 					JOptionPane.ERROR_MESSAGE);
-			LogError.get(e);
+			LOG.error(e);
 		}
+
 	}
 
 }

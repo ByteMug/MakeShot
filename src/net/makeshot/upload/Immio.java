@@ -1,15 +1,18 @@
 package net.makeshot.upload;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URI;
+import java.net.URISyntaxException;
 
 import net.makeshot.ini.Reader;
-import net.makeshot.logs.LogError;
+import net.makeshot.logs.LOG;
 import net.makeshot.main.Notifications;
 import net.makeshot.sound.Play;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
+import org.apache.http.ParseException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.mime.MultipartEntity;
@@ -43,12 +46,12 @@ public class Immio {
 					Play.error();
 			}
 
-		} catch (Exception e) {
+		} catch (URISyntaxException | ParseException | IOException e) {
 			if (net.makeshot.settings.Static.tooltip == 1)
 				Notifications.showNotification(false, "ops :(", pathu);
 			if (net.makeshot.settings.Static.playSound == 1)
 				Play.error();
-			LogError.get(e);
+			LOG.error(e);
 		}
 	}
 

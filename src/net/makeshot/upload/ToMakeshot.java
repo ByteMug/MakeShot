@@ -3,15 +3,18 @@ package net.makeshot.upload;
 import java.awt.Desktop;
 import java.awt.datatransfer.StringSelection;
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
 import java.net.URLConnection;
 
 import net.makeshot.ini.Reader;
-import net.makeshot.logs.LogError;
+import net.makeshot.logs.LOG;
 import net.makeshot.logs.Logging;
+import net.makeshot.main.Cleaner;
 import net.makeshot.main.LinksList;
 import net.makeshot.main.Notifications;
 import net.makeshot.settings.Kit;
@@ -85,16 +88,17 @@ public class ToMakeshot {
 			}
 			writer.close();
 			reader.close();
+			Cleaner.gc();
 			Thread.currentThread().interrupt();
 			return;
-		} catch (Exception e) {
+		} catch (IOException e) {
 			if (this.read.settings("tooltip").equals("1")) {
 				Notifications.showNotification(false, "ops :(", path);
 			}
 			if (this.read.settings("sound").equals("1")) {
 				Play.error();
 			}
-			LogError.get(e);
+			LOG.error(e);
 		}
 	}
 
@@ -104,7 +108,7 @@ public class ToMakeshot {
 		if ((desktop != null) && (desktop.isSupported(Desktop.Action.BROWSE))) {
 			try {
 				desktop.browse(URI.create(link));
-			} catch (Exception e) {
+			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}

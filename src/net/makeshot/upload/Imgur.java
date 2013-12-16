@@ -10,9 +10,10 @@ import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 
 import net.makeshot.ini.Reader;
-import net.makeshot.logs.LogError;
+import net.makeshot.logs.LOG;
 import net.makeshot.main.Notifications;
 import net.makeshot.settings.Static;
 import net.makeshot.sound.Play;
@@ -30,6 +31,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
 
 public class Imgur {
 	static Reader read = new Reader();
@@ -50,14 +52,14 @@ public class Imgur {
 									.getTextContent() + ".png", type, pathu);
 				}
 			}
-		} catch (Exception e) {
+		} catch (IOException | SAXException | ParserConfigurationException e) {
 			if (Static.tooltip == 1) {
 				Notifications.showNotification(false, "ops :(", pathu);
 			}
 			if (Static.playSound == 1) {
 				Play.error();
 			}
-			LogError.get(e);
+			LOG.error(e);
 		}
 	}
 
@@ -66,7 +68,7 @@ public class Imgur {
 		HttpClient client = new DefaultHttpClient();
 		HttpPost post = new HttpPost("https://api.imgur.com/3/upload.xml");
 		try {
-			List<NameValuePair> nameValuePairs = new ArrayList();
+			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 			post.addHeader("Authorization", "Client-ID 8945a38e13b7591");
 			String encod = Base64.encodeBytes(FileUtils
 					.readFileToByteArray(new File(pathu)));
@@ -87,7 +89,7 @@ public class Imgur {
 			if (Static.playSound == 1) {
 				Play.error();
 			}
-			LogError.get(e);
+			LOG.error(e);
 		}
 	}
 }

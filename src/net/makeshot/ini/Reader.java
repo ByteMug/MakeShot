@@ -2,10 +2,11 @@ package net.makeshot.ini;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
-import net.makeshot.logs.LogError;
+import net.makeshot.logs.LOG;
 import net.makeshot.settings.Fix;
 
 import org.ini4j.Ini;
@@ -29,7 +30,7 @@ public class Reader {
 				Profile.Section section = this.ini.get("Dropbox");
 				this.dropboxSettings = (section.get(tag));
 			} catch (IOException e) {
-				LogError.get(e);
+				LOG.error(e);
 			}
 		} else {
 			this.dropboxSettings = "";
@@ -45,7 +46,7 @@ public class Reader {
 				Profile.Section section = this.ini.get("FTP server");
 				this.ftpSettings = (section.get(tag));
 			} catch (IOException e) {
-				LogError.get(e);
+				LOG.error(e);
 			}
 		} else {
 			this.ftpSettings = "";
@@ -62,7 +63,7 @@ public class Reader {
 		} catch (IOException e) {
 			new Fix().repair("settings.ini");
 			new Fix().repair("hotkeys.ini");
-			LogError.get(e);
+			LOG.error(e);
 		}
 		return this.hkCode;
 	}
@@ -76,8 +77,8 @@ public class Reader {
 				return line;
 			}
 			dupa.close();
-		} catch (Exception e) {
-			LogError.get(e);
+		} catch (IOException e) {
+			LOG.error(e);
 		}
 		return line;
 	}
@@ -89,7 +90,7 @@ public class Reader {
 			Profile.Section section = this.ini.get("Settings");
 			this.settBox = (section.get(tag));
 		} catch (IOException e) {
-			LogError.get(e);
+			LOG.error(e);
 			new Fix();
 		}
 		return this.settBox;
