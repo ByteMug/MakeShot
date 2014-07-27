@@ -9,5 +9,5 @@ Installation
 
 Usage
 -----
-MakeShot is always hidden in tray at start, you can manage it from there.
+MakeShot is always hidden in tray at start, you can control it from there.
 You can read more detailed help [here](http://makeshot.net/help)
